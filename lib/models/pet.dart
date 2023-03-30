@@ -1,31 +1,68 @@
 import 'package:petshop/models/tag.dart';
-import 'package:petshop/models/category.dart';
 
 class Pet {
-  final int id;
-  final Category category;
-  final String name;
-  final String photoUrls;
-  final Tag tags;
-  final String status;
+  int? id;
+  Category? category;
+  String? name;
+  List<String>? photoUrls;
+  List<Tags>? tags;
+  String? status;
 
-  const Pet({
-    required this.id,
-    required this.category,
-    required this.name,
-    required this.photoUrls,
-    required this.tags,
-    required this.status,
-  });
+  Pet(
+      {this.id,
+        this.category,
+        this.name,
+        this.photoUrls,
+        this.tags,
+        this.status});
 
-  factory Pet.fromJson(Map<String, dynamic> json) {
-    return Pet(
-      id: json['id'],
-      category: json['category'],
-      name: json['name'],
-      photoUrls: json['photoUrls'],
-      tags: json['tags'],
-      status: json['status'],
-    );
+  Pet.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    category = json['category'] != null
+        ? new Category.fromJson(json['category'])
+        : null;
+    name = json['name'];
+    photoUrls = json['photoUrls'].cast<String>();
+    if (json['tags'] != null) {
+      tags = <Tags>[];
+      json['tags'].forEach((v) {
+        tags!.add(new Tags.fromJson(v));
+      });
+    }
+    status = json['status'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    if (this.category != null) {
+      data['category'] = this.category!.toJson();
+    }
+    data['name'] = this.name;
+    data['photoUrls'] = this.photoUrls;
+    if (this.tags != null) {
+      data['tags'] = this.tags!.map((v) => v.toJson()).toList();
+    }
+    data['status'] = this.status;
+    return data;
+  }
+}
+
+class Category {
+  int? id;
+  String? name;
+
+  Category({this.id, this.name});
+
+  Category.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    return data;
   }
 }

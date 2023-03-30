@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:petshop/repository/pet.dart';
 import '../../../models/pet.dart';
 
+// ignore: camel_case_types
 class listTrend extends StatefulWidget {
   const listTrend({super.key});
 
@@ -9,13 +10,14 @@ class listTrend extends StatefulWidget {
   State<listTrend> createState() => _listTrendState();
 }
 
+// ignore: camel_case_types
 class _listTrendState extends State<listTrend> {
   late Future<Pet> futurePet;
 
   @override
   void initState() {
     super.initState();
-    futurePet = fetchPet();
+    futurePet = fetchPet() as Future<Pet>;
   }
 
   @override
@@ -45,13 +47,13 @@ class _listTrendState extends State<listTrend> {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(15),
                             child: Image(
-                              image: AssetImage(items.data!.photoUrls),
+                              image: AssetImage(items.data!.photoUrls as String),
                               fit: BoxFit.cover,
                             ),
                           ),
                         ),
                         Text(
-                          items.data!.name,
+                          items.data!.name as String,
                           style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,

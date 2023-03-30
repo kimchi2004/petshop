@@ -1,13 +1,13 @@
 
-class Tag{
+class Tags{
   final int id;
   final String name;
-  const Tag({
+  const Tags({
     required this.id,
     required this.name,
   });
-  factory Tag.fromJson(Map<String, dynamic> json){
-    return Tag(
+  factory Tags.fromJson(Map<String, dynamic> json){
+    return Tags(
       id: json['id'],
       name: json['name'],
     );
