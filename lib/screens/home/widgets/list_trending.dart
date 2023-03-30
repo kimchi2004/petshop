@@ -27,8 +27,8 @@ class _listTrendState extends State<listTrend> {
       margin: const EdgeInsets.all(25),
       child: FutureBuilder<Pet>(
           future: futurePet,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
+          builder: (context, items) {
+            if (items.hasData) {
               return SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(children: [
@@ -47,13 +47,13 @@ class _listTrendState extends State<listTrend> {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(15),
                             child: Image(
-                              image: AssetImage(snapshot.data!.photoUrls),
+                              image: AssetImage(items.data!.photoUrls),
                               fit: BoxFit.cover,
                             ),
                           ),
                         ),
                         Text(
-                          snapshot.data!.name,
+                          items.data!.name,
                           style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
@@ -65,7 +65,7 @@ class _listTrendState extends State<listTrend> {
                         Container(
                           margin: const EdgeInsets.fromLTRB(0, 5, 105, 0),
                           child:  Text(
-                            snapshot.data!.tags as String,
+                            items.data!.tags as String,
                             style: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w400,
@@ -80,8 +80,8 @@ class _listTrendState extends State<listTrend> {
                 ]),
               );
             }
-            else if (snapshot.hasError){
-              return Text('${snapshot.error}');
+            else if (items.hasError){
+              return Text('${items.error}');
             }
             return const CircularProgressIndicator();
           }),
