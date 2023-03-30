@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 
-class browseList extends StatelessWidget {
-  const browseList({
+// ignore: camel_case_types
+class pettypeList extends StatelessWidget {
+  const pettypeList({
     super.key,
   });
 

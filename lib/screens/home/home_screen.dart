@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen>
                     StatusTrending(),
                     const listTrend(),
                     BrowseStatus(),
-                    const browseList(),
+                    const pettypeList(),
                     const browseList2(),
                     bottom(),
                   ],
