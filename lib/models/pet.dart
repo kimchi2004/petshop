@@ -1,7 +1,6 @@
 import 'package:petshop/models/tag.dart';
 import 'package:petshop/models/category.dart';
 
-
 class Pet {
   final int id;
   final Category category;
@@ -19,14 +18,14 @@ class Pet {
     required this.status,
   });
 
-  factory Pet.fromJson(Map<String, dynamic> json) =>
-      Pet(
-        id: json['id'],
-        category: Category.fromJson(json['category']),
-        name: json['name'],
-        photoUrls: json['photoUrls'],
-        tags: Tag.fromJson(json['tags']),
-        status: json['status'],
-      );
-
+  factory Pet.fromJson(Map<String, dynamic> json) {
+    return Pet(
+      id: json['id'],
+      category: json['category'],
+      name: json['name'],
+      photoUrls: json['photoUrls'],
+      tags: json['tags'],
+      status: json['status'],
+    );
+  }
 }
