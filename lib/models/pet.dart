@@ -1,20 +1,16 @@
-import 'dart:convert';
-
 import 'package:petshop/models/tag.dart';
 import 'package:petshop/models/category.dart';
 
-List<Pet> petFromJson(String str) =>
-    List<Pet>.from(json.decode(str).map((x) => Pet.fromJson(x)));
 
 class Pet {
-  int id;
-  Category category;
-  String name;
-  String photoUrls;
-  Tag tags;
-  String status;
+  final int id;
+  final Category category;
+  final String name;
+  final String photoUrls;
+  final Tag tags;
+  final String status;
 
-  Pet({
+  const Pet({
     required this.id,
     required this.category,
     required this.name,
@@ -33,14 +29,4 @@ class Pet {
         status: json['status'],
       );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['category'] = category.toJson();
-    data['name'] = name;
-    data['photoUrls'] = photoUrls;
-    data['tags'] = tags.toJson();
-    data['status'] = status;
-    return data;
-  }
 }

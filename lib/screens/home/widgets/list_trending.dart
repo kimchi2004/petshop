@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/material.dart';
 import 'package:petshop/repository/pet.dart';
 import '../../../models/pet.dart';
@@ -63,7 +65,7 @@ class _listTrendState extends State<listTrend> {
                         Container(
                           margin: const EdgeInsets.fromLTRB(0, 5, 105, 0),
                           child:  Text(
-                            snapshot.data!.status,
+                            snapshot.data!.tags as String,
                             style: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w400,
