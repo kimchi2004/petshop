@@ -23,7 +23,7 @@ class Pet {
         ? new Category.fromJson(json['category'])
         : null;
     name = json['name'];
-    photoUrls = json['photoUrls'].cast<String>();
+    photoUrls = json['photoUrls'];
     if (json['tags'] != null) {
       tags = <Tags>[];
       json['tags'].forEach((v) {
