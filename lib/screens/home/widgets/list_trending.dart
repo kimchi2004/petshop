@@ -11,12 +11,12 @@ class listTrend extends StatefulWidget {
 }
 
 class _listTrendState extends State<listTrend> {
-  late Future<Pet> futurePet = Future.value(Pet());
+  late Future<List<Pet>> futurePet;
 
   @override
   void initState() {
     super.initState();
-    futurePet = fetchPet() as Future<Pet>;
+    futurePet = fetchPet();
   }
 
   @override
@@ -24,7 +24,7 @@ class _listTrendState extends State<listTrend> {
     return Container(
       padding: const EdgeInsets.fromLTRB(0, 337, 0, double.minPositive),
       margin: const EdgeInsets.all(25),
-      child: FutureBuilder<Pet>(
+      child: FutureBuilder<List<Pet>>(
           future: futurePet,
           builder: (context, items) {
             if (items.hasData) {
@@ -46,7 +46,7 @@ class _listTrendState extends State<listTrend> {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(15),
                             child: Image(
-                              image: AssetImage(items.data!.photoUrls as String),
+                              image: AssetImage(items.data!.photoUrls),
                               fit: BoxFit.cover,
                             ),
                           ),
