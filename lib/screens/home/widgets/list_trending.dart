@@ -16,7 +16,7 @@ class _listTrendState extends State<listTrend> {
   @override
   void initState() {
     super.initState();
-    futurePet = fetchPet();
+    futurePet = fetchPet() as Future<Pet>;
   }
 
   @override
