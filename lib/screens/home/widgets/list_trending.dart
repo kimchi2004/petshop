@@ -64,7 +64,7 @@ class _listTrendState extends State<listTrend> {
                         Container(
                           margin: const EdgeInsets.fromLTRB(0, 5, 105, 0),
                           child:  Text(
-                            items.data!.tags as String,
+                            items.data!.tags as String ,
                             style: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w400,
