@@ -11,12 +11,12 @@ class listTrend extends StatefulWidget {
 }
 
 class _listTrendState extends State<listTrend> {
-  late Future<Pet> futurePet;
+  late Future<Pet> futurePet = Future.value(Pet());
 
   @override
   void initState() {
     super.initState();
-    futurePet = fetchPet() as Future<Pet>;
+    futurePet = fetchPet();
   }
 
   @override
