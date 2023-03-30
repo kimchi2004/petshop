@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:petshop/screens/home/widgets/bander.dart';
+import 'package:petshop/screens/home/widgets/list_trending.dart';
+import 'package:petshop/screens/home/widgets/list_browse.dart';
+import 'package:petshop/screens/home/widgets/list_pettype.dart';
+import 'package:petshop/screens/home/widgets/search.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -17,689 +22,126 @@ class _HomeScreenState extends State<HomeScreen>
       splitScreenMode: true,
       builder: (BuildContext context, Widget? child) {
         return Scaffold(
-          body: Stack(
-            children: [
-              Container(
-                padding:
-                    const EdgeInsets.fromLTRB(10, 47, 0, 0),
-                //margin: const EdgeInsets.all(25),
-                child: SizedBox(
-                  width: 414.w,
-                  height: 52.h,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.fromLTRB(0, 1.9, 22, 0),
-                        width: 45.w,
-                        height: 31.9.h,
-                        child: Image(
-                          image: const AssetImage('assets/images/logo.jpg'),
-                          width: 45.w,
-                          height: 31.9.h,
-                        ),
-                      ),
-                      Container(
-                        padding:
-                            const EdgeInsets.fromLTRB(10, 15, 21.21, 10),
-                        width: 273.w,
-                        height: 52.h,
-                        decoration: BoxDecoration(
-                          color: const Color(0xfff1f2f2),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: SizedBox(
-                          width: 177.36.w,
-                          height: double.infinity,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                margin: const EdgeInsets.fromLTRB(
-                                    0, 1.57, 15.97, double.minPositive),
-                                width: 18.39.w,
-                                height: 18.21.h,
-                                child: const Icon(
-                                  Icons.search,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              Text(
-                                'Search Product or Brand',
-                                style: TextStyle(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w400,
-                                  height: 1.2575.h,
-                                  color: const Color(0xff7c7c7c),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-
-              Container(
-                padding: const EdgeInsets.fromLTRB(
-                    24.71, 140, 22.29, double.minPositive),
-                child: Stack(
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                Stack(
                   children: [
-                    Positioned(
-                      child: ClipRect(
-                        child: Container(
-                          width: 367.w,
-                          height: 125.h,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Container(
-                            padding: const EdgeInsets.fromLTRB(
-                                180.29, 37, 30, 40.17),
-                            width: double.infinity,
-                            height: double.infinity,
-                            decoration: BoxDecoration(
-                              border:
-                                  Border.all(color: const Color(0xfff2f3f2)),
-                              borderRadius: BorderRadius.circular(15),
-                              gradient: const LinearGradient(
-                                begin: Alignment(-0.974, -0.939),
-                                end: Alignment(0.977, 1.009),
-                                colors: <Color>[
-                                  Color(0xff6dc298),
-                                  Color(0xff23bda8)
-                                ],
-                                stops: <double>[0, 1],
-                              ),
-                            ),
-                            child: SizedBox(
-                              width: double.infinity,
-                              height: double.infinity,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    margin: const EdgeInsets.fromLTRB(
-                                        0, 0, 0, 0),
-                                    child: Text(
-                                      'Canagan Dental',
-                                      style: TextStyle(
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.w400,
-                                        height: 1.2575,
-                                        color: const Color(0xff030303),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    child: Text(
-                                      'Get Up To 40% OFF',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w400,
-                                        color: const Color(0xffffffff),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      left: -15,
-                      top: -25,
-                      child: Align(
-                        child: SizedBox(
-                          width: 367.w,
-                          height: 148.h,
-                          child: const Image(
-                            image: AssetImage(
-                              'assets/images/bg1.jpg',
-                            ),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                    ),
+                    const seachWidget(),
+                    const banderWidget(),
+                    StatusTrending(),
+                    const listTrend(),
+                    BrowseStatus(),
+                    const browseList(),
+                    const browseList2(),
+                    bottom(),
                   ],
                 ),
-              ),
-              Container(
-                padding: const EdgeInsets.fromLTRB(
-                    24.7062988281, 317, 34.29, double.minPositive),
-                child: SizedBox(
-                  width: 378,
-                  height: 31,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.fromLTRB(0, 0, 136, 0),
-                        child: const Text(
-                          'Trending now',
-                          style: TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.w400,
-                            height: 1.2575,
-                            color: Color(0xff181725),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.fromLTRB(10, 0, 0, double.minPositive),
-                        child: const Text(
-                          'See all',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            height: 1.2575,
-                            color: Color(0xffff7322),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.fromLTRB(
-                    0, 337, 0, double.minPositive),
-                margin: const EdgeInsets.all(25),
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(children: [
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(0, 0, 24, 0),
-                      constraints: const BoxConstraints(
-                        maxWidth: 148,
-                      ),
-                      child: Column(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(15),
-                              child: const Image(
-                                image: AssetImage('assets/images/dog2.jpg'),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                          const Text(
-                            'Free puppy socialisation in store',
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                              height: 1.125,
-                              letterSpacing: 0.1000000015,
-                              color: Color(0xff1d1d1b),
-                            ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.fromLTRB(0, 5, 105, 0),
-                            child: const Text(
-                              'FREE',
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w400,
-                                height: 1.2857142857,
-                                color: Color(0xff7c7c7c),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(0, 0, 24, 0),
-                      constraints: const BoxConstraints(
-                        maxWidth: 148,
-                      ),
-                      child: Column(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(15),
-                              child: const Image(
-                                image: AssetImage('assets/images/dog3.jpg'),
-                              ),
-                            ),
-                          ),
-                          const Text(
-                            'Eco-friendly toys your dog will love',
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                              height: 1.125,
-                              letterSpacing: 0.1000000015,
-                              color: Color(0xff1d1d1b),
-                            ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.fromLTRB(0, 5, 55, 0),
-                            child: const Text(
-                              'Shop Green Elk',
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w400,
-                                height: 1.2857142857,
-                                color: Color(0xff7c7c7c),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      constraints: const BoxConstraints(
-                        maxWidth: 148,
-                      ),
-                      child: Column(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(15),
-                              child: const Image(
-                                image: AssetImage('assets/images/cat2.jpg'),
-                              ),
-                            ),
-                          ),
-                          const Text(
-                            'Parasite protection delivered monthly',
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                              height: 1.125,
-                              letterSpacing: 0.1000000015,
-                              color: Color(0xff1d1d1b),
-                            ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.fromLTRB(0, 5, 55, 0),
-                            child: const Text(
-                              'Shop Green Elk',
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w400,
-                                height: 1.2857142857,
-                                color: Color(0xff7c7c7c),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ]),
-                ),
-              ),
-
-              Container(
-                padding: const EdgeInsets.fromLTRB(
-                    24.7062988281, 603, 34.29, double.minPositive),
-                child: SizedBox(
-                  width: 378,
-                  height: 31,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.fromLTRB(0, 0, 100, 0),
-                        child: const Text(
-                          'Browse pet types',
-                          style: TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.w400,
-                            height: 1.2575,
-                            color: Color(0xff1d1d1b),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.fromLTRB(0, 0, 0, 1),
-                        child: const Text(
-                          'See all',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            height: 1.2575,
-                            color: Color(0xffff7322),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.fromLTRB(
-                    0, 630, double.minPositive, double.minPositive),
-                margin: const EdgeInsets.all(25),
-                child: SizedBox(
-                  width: 550,
-                  height: 81,
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.fromLTRB(0, 0, 16, 0),
-                          padding: const EdgeInsets.fromLTRB(13, 5, 35.45, 0),
-                          height: double.infinity,
-                          decoration: BoxDecoration(
-                            color: const Color(0x26f8a44c),
-                            borderRadius: BorderRadius.circular(18),
-                          ),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                margin:
-                                    const EdgeInsets.fromLTRB(0, 0, 14.55, 0),
-                                width: 76,
-                                height: 70,
-                                child: const Image(
-                                  image: AssetImage('assets/images/dog1.jpg'),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              Container(
-                                margin: const EdgeInsets.fromLTRB(0, 0, 0, 8),
-                                child: const Text(
-                                  'Dog',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                    height: 1.2575,
-                                    color: Color(0xff3e423f),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          // riceQ4b (1:16)
-                          margin: const EdgeInsets.fromLTRB(0, 0, 15, 0),
-                          width: 173,
-                          height: double.infinity,
-                          decoration: BoxDecoration(
-                            color: const Color(0x2653b175),
-                            borderRadius: BorderRadius.circular(18),
-                          ),
-                          child: Stack(
-                            children: const [
-                              Positioned(
-                                left: 104.1569824219,
-                                top: 30.8571472168,
-                                child: Align(
-                                  child: SizedBox(
-                                    width: 28,
-                                    height: 26,
-                                    child: Text(
-                                      'Cat',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w400,
-                                        height: 1.2575,
-                                        color: Color(0xff3d413f),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                left: 0,
-                                top: 0,
-                                child: Align(
-                                  child: SizedBox(
-                                    width: 173,
-                                    height: 81,
-                                    child: Image(
-                                      image: AssetImage('assets/images/cat1.jpg'),
-                                      width: 173,
-                                      height: 70,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.fromLTRB(
-                              19.55, 12.26, 40.84, 14.1),
-                          width: 173,
-                          height: double.infinity,
-                          decoration: BoxDecoration(
-                            color: const Color(0x26535cb1),
-                            borderRadius: BorderRadius.circular(18),
-                          ),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                  margin:
-                                      const EdgeInsets.fromLTRB(0, 0, 15, 0),
-                                  child: const Image(
-                                    image: AssetImage('assets/images/rice.jpg'),
-                                    fit: BoxFit.cover,
-                                  )),
-                              Container(
-                                margin:
-                                    const EdgeInsets.fromLTRB(0, 8.55, 0, 0),
-                                child: const Text(
-                                  'Rice',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                    height: 1.2575,
-                                    color: Color(0xff3d413f),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-
-              Container(
-                padding: const EdgeInsets.fromLTRB(
-                    0, 774, double.minPositive, double.minPositive),
-                child: Container(
-                  width: 414,
-                  height: 92,
-                  decoration: const BoxDecoration(
-                    color: Color(0xffffffff),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(15),
-                      topRight: Radius.circular(15),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color(0x16545d58),
-                        offset: Offset(2, -5),
-                        blurRadius: 7.5,
-                      ),
-                    ],
-                  ),
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        left: 30.7062988281,
-                        top: 17,
-                        child: Container(
-                          padding: const EdgeInsets.fromLTRB(0, 2, 0, 0),
-                          width: 27,
-                          height: 43.17,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                  // store1XUX (1:60)
-                                  margin:
-                                      const EdgeInsets.fromLTRB(1, 0, 0, 5.17),
-                                  width: 20,
-                                  height: 20,
-                                  child: const Icon(
-                                    Icons.storefront,
-                                  )),
-                              const Text(
-                                'Shop',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w400,
-                                  height: 1.2575,
-                                  color: Color(0xffff7322),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 121,
-                        top: 20,
-                        child: SizedBox(
-                          width: 38,
-                          height: 39.45,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                  margin:
-                                      const EdgeInsets.fromLTRB(1, 0, 0, 5.24),
-                                  width: 28.35,
-                                  height: 18.21,
-                                  child: const Icon(
-                                    Icons.manage_search_sharp,
-                                  )),
-                              const Text(
-                                'Explore',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w400,
-                                  height: 1.2575,
-                                  color: Color(0xff181725),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 224.5,
-                        top: 17,
-                        child: Container(
-                          padding: const EdgeInsets.fromLTRB(0, 2.2, 0, 0),
-                          width: 48,
-                          height: 42.69,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                  margin:
-                                      const EdgeInsets.fromLTRB(0, 0, 0, 4.89),
-                                  width: 22.8,
-                                  height: 19.6,
-                                  child: const Icon(
-                                    Icons.favorite_border,
-                                  )),
-                              const Text(
-                                'Favourite',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w400,
-                                  height: 1.2575,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 339,
-                        top: 17,
-                        child: Container(
-                          padding: const EdgeInsets.fromLTRB(0, 2, 0, 0),
-                          width: 41,
-                          height: 43.17,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                  margin:
-                                      const EdgeInsets.fromLTRB(0, 0, 1, 5.17),
-                                  width: 16.04,
-                                  height: 20,
-                                  child: const Icon(
-                                    Icons.account_circle_outlined,
-                                  )),
-                              const Text(
-                                'Account',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w400,
-                                  height: 1.2575,
-                                  color: Color(0xff181725),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 139.7062988281,
-                top: 853,
-                child: Align(
-                  child: SizedBox(
-                    width: 134,
-                    height: 5,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        border: Border.all(color: const Color(0xffe6e6e6)),
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
+    );
+  }
+
+  Positioned bottom() {
+    return Positioned(
+      left: 139.7062988281,
+      top: 853,
+      child: Align(
+        child: SizedBox(
+          width: 134,
+          height: 5,
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100),
+              border: Border.all(color: const Color(0xffe6e6e6)),
+              color: Colors.grey,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Container BrowseStatus() {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(
+          24.7062988281, 603, 34.29, double.minPositive),
+      child: SizedBox(
+        width: 378,
+        height: 31,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              margin: const EdgeInsets.fromLTRB(0, 0, 100, 0),
+              child: const Text(
+                'Browse pet types',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w400,
+                  height: 1.2575,
+                  color: Color(0xff1d1d1b),
+                ),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.fromLTRB(0, 0, 0, 1),
+              child: const Text(
+                'See all',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  height: 1.2575,
+                  color: Color(0xffff7322),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Container StatusTrending() {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(
+          24.7062988281, 317, 34.29, double.minPositive),
+      child: SizedBox(
+        width: 378,
+        height: 31,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              margin: const EdgeInsets.fromLTRB(0, 0, 136, 0),
+              child: const Text(
+                'Trending now',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w400,
+                  height: 1.2575,
+                  color: Color(0xff181725),
+                ),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.fromLTRB(10, 0, 0, double.minPositive),
+              child: const Text(
+                'See all',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  height: 1.2575,
+                  color: Color(0xffff7322),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
