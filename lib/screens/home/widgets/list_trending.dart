@@ -23,7 +23,7 @@ class _listTrendState extends State<listTrend> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(0, 337, 0, double.minPositive),
-      margin: const EdgeInsets.all(25),
+      //margin: const EdgeInsets.all(25),
       child: FutureBuilder<List<Pet>>(
           future: fetchPet(),
           builder: (BuildContext context, AsyncSnapshot<List<Pet>> items) {
@@ -64,7 +64,7 @@ class _listTrendState extends State<listTrend> {
                           ),
                         ),
                         Container(
-                          margin: const EdgeInsets.fromLTRB(0, 5, 105, 0),
+                          margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
                           child:  Text(
                             item.tags as String ,
                             style: const TextStyle(
