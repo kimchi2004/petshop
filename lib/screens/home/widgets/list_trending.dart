@@ -25,12 +25,14 @@ class _listTrendState extends State<listTrend> {
       padding: const EdgeInsets.fromLTRB(0, 337, 0, double.minPositive),
       margin: const EdgeInsets.all(25),
       child: FutureBuilder<List<Pet>>(
-          future: futurePet,
-          builder: (context, items) {
+          future: fetchPet(),
+          builder: (BuildContext context, AsyncSnapshot<List<Pet>> items) {
             if (items.hasData) {
+              List<Pet>? pets = items.data;
               return SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(children: [
+                  for (Pet item in pets!)
                   Container(
                     margin: const EdgeInsets.fromLTRB(0, 0, 24, 0),
                     constraints: const BoxConstraints(
@@ -46,13 +48,13 @@ class _listTrendState extends State<listTrend> {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(15),
                             child: Image(
-                              image: AssetImage(items.data!.photoUrls),
+                              image: AssetImage(item.photoUrls as String),
                               fit: BoxFit.cover,
                             ),
                           ),
                         ),
                         Text(
-                          items.data!.name as String,
+                          item.name ??"",
                           style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
@@ -64,7 +66,7 @@ class _listTrendState extends State<listTrend> {
                         Container(
                           margin: const EdgeInsets.fromLTRB(0, 5, 105, 0),
                           child:  Text(
-                            items.data!.tags as String ,
+                            item.tags as String ,
                             style: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w400,
