@@ -20,21 +20,21 @@ class Pet {
   Pet.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     category = json['category'] != null
-        ? new Category.fromJson(json['category'])
+        ? Category.fromJson(json['category'])
         : null;
     name = json['name'];
-    photoUrls = json['photoUrls'];
+    photoUrls = json['photoUrls'].cast<String>();
     if (json['tags'] != null) {
       tags = <Tags>[];
       json['tags'].forEach((v) {
-        tags!.add(new Tags.fromJson(v));
+        tags!.add(Tags.fromJson(v));
       });
     }
     status = json['status'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['id'] = this.id;
     if (this.category != null) {
       data['category'] = this.category!.toJson();

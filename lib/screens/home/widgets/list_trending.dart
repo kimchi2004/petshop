@@ -33,55 +33,60 @@ class _listTrendState extends State<listTrend> {
                 scrollDirection: Axis.horizontal,
                 child: Row(children: [
                   for (Pet item in pets!)
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(0, 0, 24, 0),
-                    constraints: const BoxConstraints(
-                      maxWidth: 148,
-                    ),
-                    child: Column(
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: Image(
-                              image: AssetImage(item.photoUrls as String),
-                              fit: BoxFit.cover,
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(0, 0, 24, 0),
+                      constraints: const BoxConstraints(
+                        maxWidth: 148,
+                      ),
+                      child: Column(
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: Image.network(
+                                (item.photoUrls?.isNotEmpty ?? false)
+                                    ? (Uri.parse(item.photoUrls![0])
+                                                .isAbsolute ==
+                                            true
+                                        ? item.photoUrls![0]
+                                        : "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png")
+                                    : "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png",
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
-                        ),
-                        Text(
-                          item.name ??"",
-                          style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                            height: 1.125,
-                            letterSpacing: 0.1000000015,
-                            color: Color(0xff1d1d1b),
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.fromLTRB(0, 5, 105, 0),
-                          child:  Text(
-                            item.tags as String ,
+                          Text(
+                            item.name ?? "",
                             style: const TextStyle(
-                              fontSize: 12,
+                              fontSize: 14,
                               fontWeight: FontWeight.w400,
-                              height: 1.2857142857,
-                              color: Color(0xff7c7c7c),
+                              height: 1.125,
+                              letterSpacing: 0.1000000015,
+                              color: Color(0xff1d1d1b),
                             ),
                           ),
-                        ),
-                      ],
+                          Container(
+                            margin: const EdgeInsets.fromLTRB(0, 5, 105, 0),
+                            child: Text(
+                              item.tags?.join("-") ?? "",
+                              style: const TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                                height: 1.2857142857,
+                                color: Color(0xff7c7c7c),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
                 ]),
               );
-            }
-            else if (items.hasError){
+            } else if (items.hasError) {
               return Text('${items.error}');
             }
             return const CircularProgressIndicator();
