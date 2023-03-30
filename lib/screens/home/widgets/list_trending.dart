@@ -10,7 +10,6 @@ class listTrend extends StatefulWidget {
   State<listTrend> createState() => _listTrendState();
 }
 
-// ignore: camel_case_types
 class _listTrendState extends State<listTrend> {
   late Future<Pet> futurePet;
 
