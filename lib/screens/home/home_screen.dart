@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen>
                     BrowseStatus(),
                     const pettypeList(),
                     const browseList2(),
-                    bottom(),
+                    //bottom(),
                   ],
                 ),
               ],
@@ -45,57 +45,56 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
-  Positioned bottom() {
-    return Positioned(
-      left: 139.7062988281,
-      top: 853,
-      child: Align(
-        child: SizedBox(
-          width: 134,
-          height: 5,
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(100),
-              border: Border.all(color: const Color(0xffe6e6e6)),
-              color: Colors.grey,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  // Positioned bottom() {
+  //   return Positioned(
+  //     left: 139.7062988281,
+  //     top: 853,
+  //     child: Align(
+  //       child: SizedBox(
+  //         width: 134.w,
+  //         height: 5.h,
+  //         child: Container(
+  //           decoration: BoxDecoration(
+  //             borderRadius: BorderRadius.circular(100),
+  //             border: Border.all(color: const Color(0xffe6e6e6)),
+  //             color: Colors.grey,
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Container BrowseStatus() {
     return Container(
-      padding: const EdgeInsets.fromLTRB(
-          24.7062988281, 603, 34.29, double.minPositive),
+      padding:  EdgeInsets.fromLTRB(24.7062988281.w, 497.h, 34.29.w, 0.h),
       child: SizedBox(
-        width: 378,
-        height: 31,
+        width: 378.w,
+        height: 31.h,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              margin: const EdgeInsets.fromLTRB(0, 0, 100, 0),
-              child: const Text(
+              margin: EdgeInsets.fromLTRB(0.w, 0.h, 67.w, 0.h),
+              child: Text(
                 'Browse pet types',
                 style: TextStyle(
-                  fontSize: 22,
+                  fontSize: 22.sp,
                   fontWeight: FontWeight.w400,
-                  height: 1.2575,
-                  color: Color(0xff1d1d1b),
+                  height: 1.2575.h,
+                  color: const Color(0xff1d1d1b),
                 ),
               ),
             ),
             Container(
-              margin: const EdgeInsets.fromLTRB(0, 0, 0, 1),
-              child: const Text(
+              margin: EdgeInsets.fromLTRB(0.w, 0.h, 0.w, 1.h),
+              child: Text(
                 'See all',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.w400,
-                  height: 1.2575,
-                  color: Color(0xffff7322),
+                  height: 1.2575.h,
+                  color: const Color(0xffff7322),
                 ),
               ),
             ),
@@ -107,35 +106,35 @@ class _HomeScreenState extends State<HomeScreen>
 
   Container StatusTrending() {
     return Container(
-      padding: const EdgeInsets.fromLTRB(
-          24.7062988281, 317, 34.29, double.minPositive),
+      padding: EdgeInsets.fromLTRB(
+          24.7062988281.w, 207.h, 34.29.w, 0.h),
       child: SizedBox(
         width: 378,
-        height: 31,
+        height: 41,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              margin: const EdgeInsets.fromLTRB(0, 0, 136, 0),
-              child: const Text(
+              margin:  EdgeInsets.fromLTRB(0.w, 0.h, 100.w, 0.h),
+              child: Text(
                 'Trending now',
                 style: TextStyle(
-                  fontSize: 22,
+                  fontSize: 22.sp,
                   fontWeight: FontWeight.w400,
-                  height: 1.2575,
-                  color: Color(0xff181725),
+                  height: 1.2575.h,
+                  color: const Color(0xff181725),
                 ),
               ),
             ),
             Container(
-              margin: const EdgeInsets.fromLTRB(10, 0, 0, double.minPositive),
-              child: const Text(
+              margin: EdgeInsets.fromLTRB(10.w, 0.h, 0.w, double.minPositive),
+              child: Text(
                 'See all',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.w400,
-                  height: 1.2575,
-                  color: Color(0xffff7322),
+                  height: 1.2575.h,
+                  color: const Color(0xffff7322),
                 ),
               ),
             ),

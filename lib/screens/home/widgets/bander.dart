@@ -11,10 +11,11 @@ class banderWidget extends StatelessWidget {
         splitScreenMode: true,
         builder: (BuildContext context, Widget? child){
         return Container(
-          padding: const EdgeInsets.fromLTRB(24.71, 140, 22.29, double.minPositive),
+          padding: EdgeInsets.fromLTRB(10.w, 42.h, 10.w, 0.h),
           child: Stack(
             children: [
-              Positioned(
+              Container(
+                padding: EdgeInsets.fromLTRB(0.w, 42.h, 0.w, 0.h),
                 child: ClipRect(
                   child: Container(
                     width: 367.w,
@@ -23,7 +24,7 @@ class banderWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Container(
-                      padding: const EdgeInsets.fromLTRB(180.29, 37, 30, 40.17),
+                      padding: EdgeInsets.fromLTRB(180.29.w, 37.h, 30.w, 40.17.h),
                       width: double.infinity,
                       height: double.infinity,
                       decoration: BoxDecoration(
@@ -37,19 +38,17 @@ class banderWidget extends StatelessWidget {
                         ),
                       ),
                       child: SizedBox(
-                        width: double.infinity,
-                        height: double.infinity,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Container(
-                              margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                              margin: EdgeInsets.fromLTRB(0.w, 0.h, 0.w, 0.h),
                               child: Text(
                                 'Canagan Dental',
                                 style: TextStyle(
                                   fontSize: 16.sp,
                                   fontWeight: FontWeight.w400,
-                                  height: 1.2575,
+                                  height: 1.2575.h,
                                   color: const Color(0xff030303),
                                 ),
                               ),
@@ -72,20 +71,15 @@ class banderWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              Positioned(
-                left: -15,
-                top: -25,
-                child: Align(
-                  child: SizedBox(
-                    width: 367.w,
-                    height: 148.h,
-                    child: const Image(
-                      image: AssetImage(
-                        'assets/images/bg1.jpg',
-                      ),
-                      fit: BoxFit.cover,
-                    ),
+              Container(
+                padding: EdgeInsets.fromLTRB(0.w, 19.h, 0.w, 0.h),
+                child: Image(
+                  image: const AssetImage(
+                    'assets/images/bg1.jpg',
                   ),
+                  width: 367.w,
+                  height: 148.h,
+                  fit: BoxFit.cover,
                 ),
               ),
             ],
