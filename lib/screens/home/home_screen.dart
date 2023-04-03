@@ -67,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   Container BrowseStatus() {
     return Container(
-      padding:  EdgeInsets.fromLTRB(24.7062988281.w, 497.h, 34.29.w, 0.h),
+      padding:  EdgeInsets.fromLTRB(10.w, 497.h, 34.29.w, 0.h),
       child: SizedBox(
         width: 378.w,
         height: 31.h,
@@ -75,11 +75,11 @@ class _HomeScreenState extends State<HomeScreen>
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              margin: EdgeInsets.fromLTRB(0.w, 0.h, 57.w, 0.h),
+              margin: EdgeInsets.fromLTRB(0.w, 0.h, 97.w, 0.h),
               child: Text(
                 'Browse pet types',
                 style: TextStyle(
-                  fontSize: 22.sp,
+                  fontSize: 18.sp,
                   fontWeight: FontWeight.w400,
                   height: 1.2575.h,
                   color: const Color(0xff1d1d1b),
@@ -91,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen>
               child: Text(
                 'See all',
                 style: TextStyle(
-                  fontSize: 16.sp,
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.w400,
                   height: 1.2575.h,
                   color: const Color(0xffff7322),
@@ -107,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen>
   Container StatusTrending() {
     return Container(
       padding: EdgeInsets.fromLTRB(
-          24.7062988281.w, 207.h, 34.29.w, 0.h),
+          10.w, 212.h, 34.29.w, 0.h),
       child: SizedBox(
         width: 378,
         height: 41,
@@ -115,11 +115,11 @@ class _HomeScreenState extends State<HomeScreen>
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              margin:  EdgeInsets.fromLTRB(0.w, 0.h, 90.w, 0.h),
+              margin:  EdgeInsets.fromLTRB(0.w, 0.h, 130.w, 0.h),
               child: Text(
                 'Trending now',
                 style: TextStyle(
-                  fontSize: 22.sp,
+                  fontSize: 18.sp,
                   fontWeight: FontWeight.w400,
                   height: 1.2575.h,
                   color: const Color(0xff181725),
@@ -131,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen>
               child: Text(
                 'See all',
                 style: TextStyle(
-                  fontSize: 16.sp,
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.w400,
                   height: 1.2575.h,
                   color: const Color(0xffff7322),

@@ -39,7 +39,7 @@ class banderWidget extends StatelessWidget {
                       ),
                       child: SizedBox(
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
                               margin: EdgeInsets.fromLTRB(0.w, 0.h, 0.w, 0.h),

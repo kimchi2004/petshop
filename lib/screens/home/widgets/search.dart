@@ -14,7 +14,7 @@ class seachWidget extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(10.w, 30.h, 0.w, 0.h),
           child: SizedBox(
             width: 414.w,
-            height: 52.h,
+            height: 32.h,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -31,7 +31,7 @@ class seachWidget extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.fromLTRB(10.w, 15.h, 21.21.w, 10.h),
                   width: 273.w,
-                  height: 52.h,
+                  height: 42.h,
                   decoration: BoxDecoration(
                     color: const Color(0xfff1f2f2),
                     borderRadius: BorderRadius.circular(15),
@@ -55,7 +55,7 @@ class seachWidget extends StatelessWidget {
                         Text(
                           'Search Product or Brand',
                           style: TextStyle(
-                            fontSize: 14.sp,
+                            fontSize: 12.sp,
                             fontWeight: FontWeight.w400,
                             height: 1.2575.h,
                             color: const Color(0xff7c7c7c),
