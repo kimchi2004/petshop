@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:petshop/models/category.dart';
+import '../../../models/pet.dart';
 import '../../../repository/category.dart';
 
 // ignore: camel_case_types
@@ -15,7 +16,7 @@ class pettypeList extends StatefulWidget {
 
 // ignore: camel_case_types
 class _pettypeListState extends State<pettypeList> {
-  late Future<List<Category>> futureCategory;
+  late Future<List<Pet>> futureCategory;
 
   @override
   void initState() {
@@ -31,18 +32,18 @@ class _pettypeListState extends State<pettypeList> {
       builder: (BuildContext context, Widget? child) {
         return Container(
           padding:  EdgeInsets.fromLTRB(10.w, 467.h, 25.w, 0.h),
-          child: FutureBuilder<List<Category>>(
+          child: FutureBuilder<List<Pet>>(
               future: fetchCategorty(),
-              builder: (BuildContext context, AsyncSnapshot<List<Category>> items) {
+              builder: (BuildContext context, AsyncSnapshot<List<Pet>> items) {
                 if (items.hasData) {
-                  List<Category>? categories = items.data;
+                  List<Pet>? categories = items.data;
                   return SizedBox(
                     child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          for (Category item in categories!)
+                          for (Pet item in categories!)
                             Container(
                               padding: EdgeInsets.fromLTRB(13.w, 5.h, 24.w, 0.h),
                               margin: REdgeInsets.fromLTRB(0.w, 0.h, 10.w, 0.h),
@@ -66,7 +67,7 @@ class _pettypeListState extends State<pettypeList> {
                                   Container(
                                     margin: EdgeInsets.fromLTRB(0.w, 0.h, 0.w, 8.h),
                                     child: Text(
-                                      item.name ?? "",
+                                      item.category?.name ?? "",
                                       style: TextStyle(
                                         fontSize: 16.sp,
                                         fontWeight: FontWeight.w400,
