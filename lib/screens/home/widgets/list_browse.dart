@@ -35,7 +35,7 @@ class browseList2 extends StatelessWidget {
             child: Stack(
               children: [
                 Container(
-                  padding: EdgeInsets.fromLTRB(10.w, 0.h, 10.w, 0.h),
+                  padding: EdgeInsets.fromLTRB(20.w, 0.h, 10.w, 0.h),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
