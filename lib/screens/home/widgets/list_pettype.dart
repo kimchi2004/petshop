@@ -30,7 +30,7 @@ class _pettypeListState extends State<pettypeList> {
         splitScreenMode: true,
       builder: (BuildContext context, Widget? child) {
         return Container(
-          padding:  EdgeInsets.fromLTRB(10.w, 497.h, 25.w, 0.h),
+          padding:  EdgeInsets.fromLTRB(10.w, 467.h, 25.w, 0.h),
           child: FutureBuilder<List<Category>>(
               future: fetchCategorty(),
               builder: (BuildContext context, AsyncSnapshot<List<Category>> items) {
