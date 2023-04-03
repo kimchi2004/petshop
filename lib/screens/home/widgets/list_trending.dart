@@ -72,10 +72,10 @@ class _listTrendState extends State<listTrend> {
                                     MaterialPageRoute(builder: (context) => ProductDetail()),
                                   );
                                 },
-                                // style: ElevatedButton.styleFrom(
-                                //   primary: Colors.white,
-                                //   elevation: 0,
-                                // ),
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.white,
+                                  elevation: 0,
+                                ),
                                 child: Text(
                                   item.name ?? "",
                                   style: TextStyle(
