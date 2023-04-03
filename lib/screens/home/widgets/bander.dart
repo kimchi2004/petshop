@@ -47,7 +47,7 @@ class banderWidget extends StatelessWidget {
                                 'Canagan Dental',
                                 style: TextStyle(
                                   fontSize: 16.sp,
-                                  fontWeight: FontWeight.w400,
+                                  fontWeight: FontWeight.w600,
                                   height: 1.2575.h,
                                   color: const Color(0xff030303),
                                 ),

@@ -80,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen>
                 'Browse pet types',
                 style: TextStyle(
                   fontSize: 18.sp,
-                  fontWeight: FontWeight.w400,
+                  fontWeight: FontWeight.w600,
                   height: 1.2575.h,
                   color: const Color(0xff1d1d1b),
                 ),
@@ -120,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen>
                 'Trending now',
                 style: TextStyle(
                   fontSize: 18.sp,
-                  fontWeight: FontWeight.w400,
+                  fontWeight: FontWeight.w600,
                   height: 1.2575.h,
                   color: const Color(0xff181725),
                 ),
