@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:petshop/repository/pet.dart';
+import 'package:petshop/screens/product_detail/product_detail_screen.dart';
 import '../../../models/pet.dart';
 
 // ignore: camel_case_types
@@ -64,14 +65,26 @@ class _listTrendState extends State<listTrend> {
                                   ),
                                 ),
                               ),
-                              Text(
-                                item.name ?? "",
-                                style: TextStyle(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w400,
-                                  height: 1.125.h,
-                                  letterSpacing: 0.1000000015,
-                                  color: const Color(0xff1d1d1b),
+                              ElevatedButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                    MaterialPageRoute(builder: (context) => ProductDetail()),
+                                  );
+                                },
+                                // style: ElevatedButton.styleFrom(
+                                //   primary: Colors.white,
+                                //   elevation: 0,
+                                // ),
+                                child: Text(
+                                  item.name ?? "",
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w400,
+                                    height: 1.125.h,
+                                    letterSpacing: 0.1000000015,
+                                    color: const Color(0xff1d1d1b),
+                                  ),
                                 ),
                               ),
                               Container(
