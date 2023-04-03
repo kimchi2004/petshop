@@ -73,7 +73,7 @@ class _listTrendState extends State<listTrend> {
                                   );
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  primary: Colors.white,
+                                  backgroundColor: Colors.transparent,
                                   elevation: 0,
                                 ),
                                 child: Text(
