@@ -28,8 +28,7 @@ class _listTrendState extends State<listTrend> {
         splitScreenMode: true,
         builder: (BuildContext context, Widget? child) {
         return Container(
-          padding: EdgeInsets.fromLTRB(0.w, 50.h, 0.w, double.minPositive),
-          margin: const EdgeInsets.all(25),
+          padding: EdgeInsets.fromLTRB(10.w, 50.h, 0.w, double.minPositive),
           child: FutureBuilder<List<Pet>>(
               future: fetchPet(),
               builder: (BuildContext context, AsyncSnapshot<List<Pet>> items) {
@@ -40,7 +39,7 @@ class _listTrendState extends State<listTrend> {
                     child: Row(children: [
                       for (Pet item in pets!)
                         Container(
-                          margin: EdgeInsets.fromLTRB(0.w, 180.h, 24.w, 0.h),
+                          margin: EdgeInsets.fromLTRB(0.w, 210.h, 24.w, 0.h),
                           constraints: const BoxConstraints(
                             maxWidth: 148,
                           ),

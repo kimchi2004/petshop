@@ -75,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen>
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              margin: EdgeInsets.fromLTRB(0.w, 0.h, 67.w, 0.h),
+              margin: EdgeInsets.fromLTRB(0.w, 0.h, 57.w, 0.h),
               child: Text(
                 'Browse pet types',
                 style: TextStyle(
@@ -115,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen>
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              margin:  EdgeInsets.fromLTRB(0.w, 0.h, 100.w, 0.h),
+              margin:  EdgeInsets.fromLTRB(0.w, 0.h, 90.w, 0.h),
               child: Text(
                 'Trending now',
                 style: TextStyle(

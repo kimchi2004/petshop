@@ -14,10 +14,10 @@ class browseList2 extends StatelessWidget {
         splitScreenMode: true,
         builder: (BuildContext context, Widget? child) {
         return Container(
-          padding: EdgeInsets.fromLTRB(0.w, 618.h, 0.w,0.h),
+          padding: EdgeInsets.fromLTRB(0.w, 648.h, 0.w,0.h),
           child: Container(
             width: 414.w,
-            height: 82.h,
+            height: 52.h,
             decoration: const BoxDecoration(
               color: Color(0xffffffff),
               borderRadius: BorderRadius.only(
@@ -110,7 +110,7 @@ class browseList2 extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.fromLTRB(310.w, 0.h, 10.w, 0.h),
+                  padding: EdgeInsets.fromLTRB(300.w, 0.h, 10.w, 0.h),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [

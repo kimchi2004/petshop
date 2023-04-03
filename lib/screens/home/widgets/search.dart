@@ -11,7 +11,7 @@ class seachWidget extends StatelessWidget {
         splitScreenMode: true,
         builder: (BuildContext context, Widget? child) {
         return Container(
-          padding: EdgeInsets.fromLTRB(10.w, 20.h, 0.w, 0.h),
+          padding: EdgeInsets.fromLTRB(10.w, 30.h, 0.w, 0.h),
           child: SizedBox(
             width: 414.w,
             height: 52.h,

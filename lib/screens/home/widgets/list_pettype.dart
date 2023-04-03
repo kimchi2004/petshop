@@ -30,7 +30,7 @@ class _pettypeListState extends State<pettypeList> {
         splitScreenMode: true,
       builder: (BuildContext context, Widget? child) {
         return Container(
-          padding:  EdgeInsets.fromLTRB(25.w, 497.h, 25.w, 0.h),
+          padding:  EdgeInsets.fromLTRB(10.w, 497.h, 25.w, 0.h),
           child: FutureBuilder<List<Category>>(
               future: fetchCategorty(),
               builder: (BuildContext context, AsyncSnapshot<List<Category>> items) {
@@ -40,11 +40,12 @@ class _pettypeListState extends State<pettypeList> {
                     child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
-                        //crossAxisAlignment: CrossAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           for (Category item in categories!)
                             Container(
-                              padding: EdgeInsets.fromLTRB(13.w, 5.h, 24, 0.h),
+                              padding: EdgeInsets.fromLTRB(13.w, 5.h, 24.w, 0.h),
+                              margin: REdgeInsets.fromLTRB(0.w, 0.h, 10.w, 0.h),
                               decoration: BoxDecoration(
                                 color: const Color(0x26f8a44c),
                                 borderRadius: BorderRadius.circular(18),

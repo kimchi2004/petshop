@@ -58,7 +58,7 @@ class banderWidget extends StatelessWidget {
                                 'Get Up To 40% OFF',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  fontSize: 14.sp,
+                                  fontSize: 12.sp,
                                   fontWeight: FontWeight.w400,
                                   color: const Color(0xffffffff),
                                 ),
@@ -77,7 +77,7 @@ class banderWidget extends StatelessWidget {
                   image: const AssetImage(
                     'assets/images/bg1.jpg',
                   ),
-                  width: 367.w,
+                  width: 350.w,
                   height: 148.h,
                   fit: BoxFit.cover,
                 ),
