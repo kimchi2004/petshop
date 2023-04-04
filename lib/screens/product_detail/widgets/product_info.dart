@@ -10,6 +10,13 @@ class ProductInfo extends StatefulWidget {
 }
 
 class _ProductInfoState extends State<ProductInfo> {
+
+  bool isFavorited = false;
+  void _toggleFavorite(){
+    setState(() {
+      isFavorited = !isFavorited;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -32,12 +39,15 @@ class _ProductInfoState extends State<ProductInfo> {
                 padding: EdgeInsets.fromLTRB(20.w, 0.h, 0.w, 0.h),
               ),
               actions: [
-                IconButton(
-                  onPressed: () {
-                  },
-                  color: Colors.black,
-                  icon: const Icon(Icons.favorite_border),
-                  padding: EdgeInsets.fromLTRB(0.w, 0.h, 20.w, 0.h),
+                Container(
+                  padding: EdgeInsets.fromLTRB(0.w, 0.h, 20.w, 0.h) ,
+                  child: InkWell(
+                    onTap: _toggleFavorite,
+                    child: Icon(
+                      isFavorited ? Icons.favorite : Icons.favorite_border,
+                      color: isFavorited ? Colors.red : Colors.black,
+                    ),
+                  ),
                 ),
               ]),
           body: Column(
