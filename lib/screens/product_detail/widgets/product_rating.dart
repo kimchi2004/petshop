@@ -17,7 +17,7 @@ class _ProductRatingState extends State<ProductRating> {
         splitScreenMode: true,
         builder: (BuildContext context, Widget? child) {
         return Container(
-          padding: EdgeInsets.fromLTRB(15.w, 390.h, 0.w, 0.h),
+          padding: EdgeInsets.fromLTRB(15.w, 360.h, 0.w, 0.h),
           child: RatingBar.builder(
               initialRating: 3,
               minRating: 1,

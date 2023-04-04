@@ -55,9 +55,8 @@ class _ProductInfoState extends State<ProductInfo> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                margin: EdgeInsets.fromLTRB(50.w, 0.h, 0.w, 0.h),
-                width: 260.w,
-                height: 230.h,
+                margin: EdgeInsets.fromLTRB(80.w, 0.h, 0.w, 0.h),
+                height: 200.h,
                 child: const Image(
                   image: AssetImage('assets/images/product.jpg'),
                   fit: BoxFit.cover,
