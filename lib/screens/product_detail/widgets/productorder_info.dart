@@ -16,7 +16,7 @@ class _ProductOrderInfoState extends State<ProductOrderInfo> {
         splitScreenMode: true,
         builder: (BuildContext context, Widget? child) {
         return Container(
-          padding: EdgeInsets.fromLTRB(20.w, 425.h, 0.w, 0.h),
+          padding: EdgeInsets.fromLTRB(20.w, 435.h, 0.w, 0.h),
           child: Column(
             children: [
               Row(

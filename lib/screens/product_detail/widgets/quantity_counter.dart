@@ -17,7 +17,7 @@ class _QuantityCounterState extends State<QuantityCounter> {
         splitScreenMode: true,
         builder: (BuildContext context, Widget? child) {
         return Container(
-          padding: EdgeInsets.fromLTRB(15.w, 120.h, 0.w, 0.h),
+          padding: EdgeInsets.fromLTRB(15.w, 130.h, 0.w, 0.h),
           child: Row(
             children: [
               IconButton(
