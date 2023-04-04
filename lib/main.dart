@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:petshop/screens/product_detail/product_detail_screen.dart';
+import 'package:petshop/screens/product_detail/productdetail_screen.dart';
 void main() {
   runApp(const MaterialApp(
     //home: HomeScreen(),

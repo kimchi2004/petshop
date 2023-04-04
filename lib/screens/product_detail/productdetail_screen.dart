@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:petshop/screens/product_detail/widgets/product_info.dart';
+import 'package:petshop/screens/product_detail/widgets/product_rating.dart';
+import 'package:petshop/screens/product_detail/widgets/quantity_counter.dart';
 
 class ProductDetail extends StatefulWidget {
   const ProductDetail({Key? key}) : super(key: key);
@@ -23,6 +25,8 @@ class _ProductDetailState extends State<ProductDetail> with SingleTickerProvider
                 Stack(
                   children: const [
                     ProductInfo(),
+                    ProductRating(),
+                    QuantityCounter(),
                   ],
                 )
               ],

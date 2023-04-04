@@ -28,12 +28,11 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  http:
-    version: any
+  flutter_rating_bar: ^4.0.0
+  http: ^0.13.5
   flutter:
     sdk: flutter
-  flutter_screenutil:
-    version: any
+  flutter_screenutil: ^5.0.1
 
 
   # The following adds the Cupertino Icons font to your application.

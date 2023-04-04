@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:petshop/repository/pet.dart';
-import 'package:petshop/screens/product_detail/product_detail_screen.dart';
+import 'package:petshop/screens/product_detail/productdetail_screen.dart';
 import '../../../models/pet.dart';
 
 // ignore: camel_case_types

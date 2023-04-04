@@ -40,30 +40,66 @@ class _ProductInfoState extends State<ProductInfo> {
                   padding: EdgeInsets.fromLTRB(0.w, 0.h, 20.w, 0.h),
                 ),
               ]),
-          body: Container(
-            padding: EdgeInsets.fromLTRB(40.w, 0.h, 0.w, 0.h),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  margin: EdgeInsets.fromLTRB(0.w, 0.h, 0.w, 0.h),
-                  width: 260.w,
-                  height: 260.h,
-                  child: Stack(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.fromLTRB(0.w, 0.h, 0.w, 0.h),
-                        child: const Image(
-                          image: AssetImage('assets/images/product.jpg'),
-                          fit: BoxFit.cover,
-                        ),
-                      )
-                      //pagination
-                    ],
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                margin: EdgeInsets.fromLTRB(50.w, 0.h, 0.w, 0.h),
+                width: 260.w,
+                height: 230.h,
+                child: const Image(
+                  image: AssetImage('assets/images/product.jpg'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Container(
+                  //pagination
+              ),
+              Row(
+                children: [
+                  Container(
+                    width: 240.w,
+                    margin: EdgeInsets.fromLTRB(20.w, 0.h, 20.w, 10.h),
+                    child: Text(
+                      'Symply Dog Adult Chicken With Rice & Vegetables',
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w400,
+                        height: 1.4.h,
+                        letterSpacing: 0.1,
+                        color: const Color(0xff181725),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(0.w,0.h, 0.w, 0.h),
+                    child: Text(
+                      '£1.99',
+                      textAlign: TextAlign.right,
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w400,
+                        height: 0.75.h,
+                        letterSpacing: 0.1,
+                        color: const Color(0xff181725)
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              Container(
+                padding: EdgeInsets.fromLTRB(20.w, 0.h,0.w,0.h),
+                child: Text(
+                  '395g',
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w400,
+                    height: 1.125.h,
+                    color: const Color(0xff7c7c7c),
                   ),
                 ),
-              ],
-            ),
+              )
+            ],
           ),
         );
       },
