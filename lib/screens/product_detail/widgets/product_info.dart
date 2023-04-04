@@ -10,13 +10,14 @@ class ProductInfo extends StatefulWidget {
 }
 
 class _ProductInfoState extends State<ProductInfo> {
-
   bool isFavorited = false;
-  void _toggleFavorite(){
+
+  void _toggleFavorite() {
     setState(() {
       isFavorited = !isFavorited;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -40,7 +41,7 @@ class _ProductInfoState extends State<ProductInfo> {
               ),
               actions: [
                 Container(
-                  padding: EdgeInsets.fromLTRB(0.w, 0.h, 20.w, 0.h) ,
+                  padding: EdgeInsets.fromLTRB(0.w, 0.h, 20.w, 0.h),
                   child: InkWell(
                     onTap: _toggleFavorite,
                     child: Icon(
@@ -48,7 +49,7 @@ class _ProductInfoState extends State<ProductInfo> {
                       color: isFavorited ? Colors.red : Colors.black,
                     ),
                   ),
-                ),
+                )
               ]),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,7 +65,7 @@ class _ProductInfoState extends State<ProductInfo> {
               ),
               Container(
                   //pagination
-              ),
+                  ),
               Row(
                 children: [
                   Container(
@@ -82,23 +83,22 @@ class _ProductInfoState extends State<ProductInfo> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.fromLTRB(0.w,0.h, 0.w, 0.h),
+                    margin: EdgeInsets.fromLTRB(0.w, 0.h, 0.w, 0.h),
                     child: Text(
                       '£1.99',
                       textAlign: TextAlign.right,
                       style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w400,
-                        height: 0.75.h,
-                        letterSpacing: 0.1,
-                        color: const Color(0xff181725)
-                      ),
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w400,
+                          height: 0.75.h,
+                          letterSpacing: 0.1,
+                          color: const Color(0xff181725)),
                     ),
                   )
                 ],
               ),
               Container(
-                padding: EdgeInsets.fromLTRB(20.w, 0.h,0.w,0.h),
+                padding: EdgeInsets.fromLTRB(20.w, 0.h, 0.w, 0.h),
                 child: Text(
                   '395g',
                   style: TextStyle(
