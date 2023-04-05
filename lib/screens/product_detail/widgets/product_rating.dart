@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductRating extends StatefulWidget {
-  //const ProductRating({Key? key, this.maxRating = 5, required this.onRatingSelected}) : super(key: key);
-
   final int maxRating;
-
   const ProductRating({super.key, this.maxRating = 5});
 
   @override
