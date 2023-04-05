@@ -9,7 +9,7 @@ List<Pet> parserPet(String responseBody) {
   return parsed.map<Pet>((json) => Pet.fromJson(json)).toList();
 }
 
-Future<List<Pet>> fetchPet() async {
+Future<List<Pet>> fetchPet(int id) async {
   final response = await http
       .get(Uri.parse('https://petstore.swagger.io/v2/pet/findByStatus?status=available'));
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:petshop/screens/product_detail/productdetail_screen.dart';
+import 'package:petshop/screens/home/home_screen.dart';
 void main() {
   runApp(const MaterialApp(
-    //home: HomeScreen(),
-    home: ProductDetail(),
+    home: HomeScreen(),
+    //home: ProductDetail(),
     debugShowCheckedModeBanner: false,
   ));
 }

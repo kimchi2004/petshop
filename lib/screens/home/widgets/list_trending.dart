@@ -14,12 +14,13 @@ class listTrend extends StatefulWidget {
 
 // ignore: camel_case_types
 class _listTrendState extends State<listTrend> {
+  late int _petId;
   late Future<List<Pet>> futurePet;
 
   @override
   void initState() {
     super.initState();
-    futurePet = fetchPet();
+    futurePet = fetchPet(_petId);
   }
 
   @override
@@ -31,7 +32,6 @@ class _listTrendState extends State<listTrend> {
         return Container(
           padding: EdgeInsets.fromLTRB(10.w, 50.h, 0.w, double.minPositive),
           child: FutureBuilder<List<Pet>>(
-              future: fetchPet(),
               builder: (BuildContext context, AsyncSnapshot<List<Pet>> items) {
                 if (items.hasData) {
                   List<Pet>? pets = items.data;
@@ -40,10 +40,10 @@ class _listTrendState extends State<listTrend> {
                     child: Row(children: [
                       for (Pet item in pets!)
                         GestureDetector(
-                          onTap: () {
+                          onTap: () async{
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => const ProductDetail()),
+                              MaterialPageRoute(builder: (context) =>  ProductDetail(petId: item.id!)),
                             );
                           },
                           child: Container(
