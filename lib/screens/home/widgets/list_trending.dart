@@ -70,7 +70,6 @@ class _listTrendState extends State<listTrend> {
                                   Navigator.push(
                                       context,
                                     MaterialPageRoute(builder: (context) => const ProductDetail()),
-
                                   );
                                 },
                                 style: ElevatedButton.styleFrom(

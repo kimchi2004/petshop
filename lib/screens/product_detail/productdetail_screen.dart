@@ -26,7 +26,7 @@ class _ProductDetailState extends State<ProductDetail> with SingleTickerProvider
                 Stack(
                   children: const [
                     ProductInfo(),
-                    ProductRating(),
+                    ProductRating(maxRating: 5),
                     QuantityCounter(),
                     ProductOrderInfo(),
                   ],
