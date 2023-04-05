@@ -3,7 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:petshop/screens/home/home_screen.dart';
 
 class ProductInfo extends StatefulWidget {
-  const ProductInfo({Key? key}) : super(key: key);
+  final int petId;
+  const ProductInfo({Key? key, required this.petId}) : super(key: key);
 
   @override
   State<ProductInfo> createState() => _ProductInfoState();
@@ -20,6 +21,7 @@ class _ProductInfoState extends State<ProductInfo> {
 
   @override
   Widget build(BuildContext context) {
+    //final pet = fetchPet(widget.petId);
     return ScreenUtilInit(
       minTextAdapt: true,
       splitScreenMode: true,

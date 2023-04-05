@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:petshop/screens/product_detail/widgets/product_info.dart';
 import 'package:petshop/screens/product_detail/widgets/product_rating.dart';
 import 'package:petshop/screens/product_detail/widgets/productorder_info.dart';
 import 'package:petshop/screens/product_detail/widgets/quantity_counter.dart';
@@ -25,7 +24,7 @@ class _ProductDetailState extends State<ProductDetail> with SingleTickerProvider
               children: [
                 Stack(
                   children: const [
-                    ProductInfo(),
+                    //ProductInfo(),
                     ProductRating(maxRating: 5),
                     QuantityCounter(),
                     ProductOrderInfo(),
