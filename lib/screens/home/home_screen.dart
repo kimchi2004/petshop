@@ -109,8 +109,8 @@ class _HomeScreenState extends State<HomeScreen>
       padding: EdgeInsets.fromLTRB(
           10.w, 212.h, 34.29.w, 0.h),
       child: SizedBox(
-        width: 378,
-        height: 41,
+        width: 378.w,
+        height: 41.h,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
