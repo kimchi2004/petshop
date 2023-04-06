@@ -41,11 +41,16 @@ class _listTrendState extends State<listTrend> {
                       for (Pet item in pets!)
                         GestureDetector(
                           onTap: () async{
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) =>  ProductDetail(petId: item.id!)),
-                            );
-                          },
+                    try {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) =>
+                            ProductDetail(petId: item.id!)),
+                      );
+                    } catch (e) {
+                      print(e);
+                    }
+                    },
                           child: Container(
                             width: 148.w,
                             height: 230.h,
