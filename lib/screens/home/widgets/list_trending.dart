@@ -35,7 +35,7 @@ class _listTrendState extends State<listTrend> {
                 builder:
                     (BuildContext context, AsyncSnapshot<List<Pet>> items) {
                   if (items.hasData) {
-                    List<Pet>? pets = items.data;
+                    List<Pet>? pets = items.data?.take(10).toList();
                     return SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(children: [
