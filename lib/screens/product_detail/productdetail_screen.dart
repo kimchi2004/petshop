@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:petshop/screens/product_detail/widgets/add_to_cart.dart';
 import 'package:petshop/screens/product_detail/widgets/product_info.dart';
 import 'package:petshop/screens/product_detail/widgets/product_rating.dart';
-import 'package:petshop/screens/product_detail/widgets/productorder_info.dart';
+import 'package:petshop/screens/product_detail/widgets/product_detail.dart';
 import 'package:petshop/screens/product_detail/widgets/quantity_counter.dart';
 
 
