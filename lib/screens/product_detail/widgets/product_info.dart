@@ -75,7 +75,7 @@ class _ProductInfoState extends State<ProductInfo> {
                         for(Pet pet in pets!)
                           if(pet.id == widget.id)
                           Container(
-                            margin: EdgeInsets.fromLTRB(80.w, 0.h, 0.w, 0.h),
+                            padding: EdgeInsets.fromLTRB(90.w, 0.h, 90.w, 0.h),
                             height: 200.h,
                             child: Image.network(
                               (pet.photoUrls?.isNotEmpty ?? false)
@@ -99,7 +99,7 @@ class _ProductInfoState extends State<ProductInfo> {
                               Container(
                                 width: 240.w,
                                 margin: EdgeInsets.fromLTRB(
-                                    20.w, 0.h, 20.w, 10.h),
+                                    20.w, 0.h, 20.w, 3.h),
                                 child: Text(
                                   pet.name ?? "",
                                   style: TextStyle(

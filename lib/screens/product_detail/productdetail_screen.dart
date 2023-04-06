@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:petshop/screens/product_detail/widgets/add_to_cart.dart';
 import 'package:petshop/screens/product_detail/widgets/product_info.dart';
 import 'package:petshop/screens/product_detail/widgets/product_rating.dart';
 import 'package:petshop/screens/product_detail/widgets/productorder_info.dart';
@@ -29,10 +30,11 @@ class _ProductDetailState extends State<ProductDetail>
                 children: [
                   Stack(
                     children: [
-                       ProductInfo(id: widget.id ),
+                      ProductInfo(id: widget.id ),
                       const ProductRating(maxRating: 5),
                       const QuantityCounter(),
-                      const ProductOrderInfo(),
+                      ProductOrderInfo(id: widget.id),
+                      const AddToCart(),
                     ],
                   )
                 ],

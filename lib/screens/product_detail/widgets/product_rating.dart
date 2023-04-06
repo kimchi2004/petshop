@@ -14,7 +14,7 @@ class _ProductRatingState extends State<ProductRating> {
   int _currentRating = 0;
 
   Widget _buildRatingStar(int index) {
-    if (index < _currentRating) {
+    if (index <= _currentRating) {
       return const Icon(Icons.star, color: Colors.deepOrange);
     } else {
       return const Icon(Icons.star_border, color: Colors.deepOrange);
@@ -34,7 +34,7 @@ class _ProductRatingState extends State<ProductRating> {
       ));
     }
     return Container(
-      padding: EdgeInsets.fromLTRB(15.w, 50.h, 0.w, 0.h),
+      padding: EdgeInsets.fromLTRB(15.w, 0.h, 0.w, 0.h),
       child: Row(
           mainAxisAlignment: MainAxisAlignment.start, 
           children: stars
