@@ -119,7 +119,11 @@ class _listTrendState extends State<listTrend> {
                   } else if (items.hasError) {
                     return Text('${items.error}');
                   }
-                  return const CircularProgressIndicator();
+                  return Transform.scale(
+                      scaleX: 0.1,
+                      scaleY: 0.05,
+                      child: const CircularProgressIndicator()
+                  );
                 }),
           );
         });

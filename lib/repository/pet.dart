@@ -22,7 +22,7 @@ Future<List<Pet>> fetchPet() async {
 
 Future<List<Pet>> fetchPetid(int id) async {
   final response = await http
-      .get(Uri.parse('https://petstore.swagger.io/v2/pet/1'));
+      .get(Uri.parse('https://petstore.swagger.io/v2/pet/findByStatus?status=available'));
 
   if (response.statusCode == 200) {
     return parserPet(response.body);

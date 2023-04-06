@@ -77,10 +77,6 @@ class _ProductInfoState extends State<ProductInfo> {
                           Container(
                             margin: EdgeInsets.fromLTRB(80.w, 0.h, 0.w, 0.h),
                             height: 200.h,
-                            // child: const Image(
-                            //   image: AssetImage('assets/images/product.jpg'),
-                            //     fit: BoxFit.cover,
-                            // )
                             child: Image.network(
                               (pet.photoUrls?.isNotEmpty ?? false)
                                   ? (Uri
@@ -106,7 +102,6 @@ class _ProductInfoState extends State<ProductInfo> {
                                     20.w, 0.h, 20.w, 10.h),
                                 child: Text(
                                   pet.name ?? "",
-                                  //'Symply Dog Adult Chicken With Rice & Vegetables',
                                   style: TextStyle(
                                     fontSize: 16.sp,
                                     fontWeight: FontWeight.w400,
@@ -149,7 +144,11 @@ class _ProductInfoState extends State<ProductInfo> {
               } else if (items.hasError) {
                 return Text('Error: ${items.error}');
               } else {
-                return const CircularProgressIndicator();
+                return Transform.scale(
+                    scaleX: 0.1,
+                    scaleY: 0.05,
+                    child: const CircularProgressIndicator()
+                );
               }
             },
         );
