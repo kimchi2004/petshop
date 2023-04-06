@@ -7,9 +7,8 @@ import 'package:petshop/screens/product_detail/widgets/quantity_counter.dart';
 
 
 class ProductDetail extends StatefulWidget {
-  final int petId;
-
-  const ProductDetail({Key? key, required this.petId}) : super(key: key);
+  late int id;
+  ProductDetail({Key? key, required this.id}) : super(key: key);
 
   @override
   State<ProductDetail> createState() => _ProductDetailState();
@@ -30,7 +29,7 @@ class _ProductDetailState extends State<ProductDetail>
                 children: [
                   Stack(
                     children: [
-                       ProductInfo(petId: widget.petId),
+                       ProductInfo(id: widget.id ),
                       const ProductRating(maxRating: 5),
                       const QuantityCounter(),
                       const ProductOrderInfo(),

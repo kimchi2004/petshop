@@ -4,11 +4,10 @@ import 'package:petshop/models/pet.dart';
 import 'package:petshop/repository/pet.dart';
 import 'package:petshop/screens/home/home_screen.dart';
 
+// ignore: must_be_immutable
 class ProductInfo extends StatefulWidget {
-  final int petId;
-  const ProductInfo({
-    Key? key, required this.petId,
-  }) : super(key: key);
+  late int id;
+  ProductInfo({Key? key,required this.id}) : super(key: key);
 
   @override
   State<ProductInfo> createState() => _ProductInfoState();
@@ -27,7 +26,7 @@ class _ProductInfoState extends State<ProductInfo> {
   @override
   void initState() {
     super.initState();
-    _petFuture = fetchPetid(widget.petId);
+    _petFuture = fetchPet(widget.id);
   }
 
   @override
@@ -73,13 +72,16 @@ class _ProductInfoState extends State<ProductInfo> {
                     body: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        for(Pet pet in pets! )
-                          if(pet.id == widget.petId)
+                        for(Pet pet in pets!)
+                          if(pet.id == widget.id)
                           Container(
                             margin: EdgeInsets.fromLTRB(80.w, 0.h, 0.w, 0.h),
                             height: 200.h,
-                            child:
-                            Image.network(
+                            // child: const Image(
+                            //   image: AssetImage('assets/images/product.jpg'),
+                            //     fit: BoxFit.cover,
+                            // )
+                            child: Image.network(
                               (pet.photoUrls?.isNotEmpty ?? false)
                                   ? (Uri
                                   .parse(pet.photoUrls![0])
@@ -90,8 +92,6 @@ class _ProductInfoState extends State<ProductInfo> {
                                   : "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png",
                               fit: BoxFit.cover,
                             ),
-                            //AssetImage('assets/images/product.jpg'),
-                            //fit: BoxFit.cover,
                           ),
                           Container(
                             //pagination
@@ -99,7 +99,7 @@ class _ProductInfoState extends State<ProductInfo> {
                           Row(
                             children: [
                               for(Pet pet in pets)
-                                if(pet.id == widget.petId)
+                                if(pet.id == widget.id)
                               Container(
                                 width: 240.w,
                                 margin: EdgeInsets.fromLTRB(

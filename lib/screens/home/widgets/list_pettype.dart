@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:petshop/models/category.dart';
 import '../../../models/pet.dart';
 import '../../../repository/category.dart';
 
@@ -59,7 +58,6 @@ class _pettypeListState extends State<pettypeList> {
                                     width: 76.w,
                                     height: 70.h,
                                     child: const Image(
-                                      //image: AssetImage('assets/images/dog1.jpg'),
                                       image: NetworkImage('https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png'),
                                       fit: BoxFit.cover,
                                     ),
