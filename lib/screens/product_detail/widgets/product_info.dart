@@ -16,7 +16,7 @@ class ProductInfo extends StatefulWidget {
 
 class _ProductInfoState extends State<ProductInfo> {
   bool isFavorited = false;
-  late Future<Pet> _petFuture;
+  late Future<List<Pet>> _petFuture;
 
   void _toggleFavorite() {
     setState(() {
@@ -27,7 +27,7 @@ class _ProductInfoState extends State<ProductInfo> {
   @override
   void initState() {
     super.initState();
-    _petFuture = fetchPetid(widget.petId) as Future<Pet>;
+    _petFuture = fetchPet(widget.petId);
   }
 
   @override
@@ -36,11 +36,11 @@ class _ProductInfoState extends State<ProductInfo> {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (BuildContext context, Widget? child) {
-        return FutureBuilder<Pet>(
+        return FutureBuilder<List<Pet>>(
             future: _petFuture,
-            builder: (BuildContext context, AsyncSnapshot<Pet> items) {
+            builder: (BuildContext context, AsyncSnapshot<List<Pet>> items) {
               if (items.hasData) {
-                final pets = items.data;
+                List<Pet>? pets = items.data;
                   return Scaffold(
                     appBar: AppBar(
                         backgroundColor: Colors.transparent,
@@ -73,17 +73,19 @@ class _ProductInfoState extends State<ProductInfo> {
                     body: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        for(Pet pet in pets! )
+                          if(pet.id == widget.petId)
                           Container(
                             margin: EdgeInsets.fromLTRB(80.w, 0.h, 0.w, 0.h),
                             height: 200.h,
                             child:
                             Image.network(
-                              (pets?.photoUrls ) != null
+                              (pet.photoUrls?.isNotEmpty ?? false)
                                   ? (Uri
-                                  .parse(pets?.photoUrls as String)
+                                  .parse(pet.photoUrls![0])
                                   .isAbsolute ==
                                   true
-                                  ? pets!.photoUrls![0]
+                                  ? pet.photoUrls![0]
                                   : "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png")
                                   : "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png",
                               fit: BoxFit.cover,
@@ -96,12 +98,14 @@ class _ProductInfoState extends State<ProductInfo> {
                           ),
                           Row(
                             children: [
+                              for(Pet pet in pets)
+                                if(pet.id == widget.petId)
                               Container(
                                 width: 240.w,
                                 margin: EdgeInsets.fromLTRB(
                                     20.w, 0.h, 20.w, 10.h),
                                 child: Text(
-                                  pets?.name ?? "",
+                                  pet.name ?? "",
                                   //'Symply Dog Adult Chicken With Rice & Vegetables',
                                   style: TextStyle(
                                     fontSize: 16.sp,

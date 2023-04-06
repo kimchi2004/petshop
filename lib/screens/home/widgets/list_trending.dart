@@ -14,12 +14,13 @@ class listTrend extends StatefulWidget {
 
 // ignore: camel_case_types
 class _listTrendState extends State<listTrend> {
+  late int _petId;
   late Future<List<Pet>> futurePet;
 
   @override
   void initState() {
     super.initState();
-    futurePet = fetchPet();
+    futurePet = fetchPet(_petId);
   }
 
   @override
