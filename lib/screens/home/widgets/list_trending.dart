@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:petshop/repository/pet.dart';
-import 'package:petshop/screens/product_detail/productdetail_screen.dart';
 import '../../../models/pet.dart';
 
 // ignore: camel_case_types
@@ -40,11 +39,11 @@ class _listTrendState extends State<listTrend> {
                       for (Pet item in pets!)
                         GestureDetector(
                           onTap: () async{
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) =>
-                            ProductDetail(petId: item.id!)),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(builder: (context) =>
+                      //       ProductDetail(petId: item.id!)),
+                      // );
                     },
                           child: Container(
                             width: 148.w,
