@@ -26,7 +26,7 @@ class _ProductInfoState extends State<ProductInfo> {
   @override
   void initState() {
     super.initState();
-    _petFuture = fetchPet(widget.id);
+    _petFuture = fetchPetid(widget.id);
   }
 
   @override

@@ -14,13 +14,12 @@ class listTrend extends StatefulWidget {
 
 // ignore: camel_case_types
 class _listTrendState extends State<listTrend> {
-  late int id;
   late Future<List<Pet>> futurePet;
 
   @override
   void initState() {
     super.initState();
-    futurePet = fetchPet(id);
+    futurePet = fetchPet();
   }
 
   @override
@@ -32,7 +31,7 @@ class _listTrendState extends State<listTrend> {
           return Container(
             padding: EdgeInsets.fromLTRB(10.w, 50.h, 0.w, double.minPositive),
             child: FutureBuilder<List<Pet>>(
-                future: fetchPet(id),
+                future: fetchPet(),
                 builder:
                     (BuildContext context, AsyncSnapshot<List<Pet>> items) {
                   if (items.hasData) {
