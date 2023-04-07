@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:petshop/screens/home/widgets/bander.dart';
+import 'package:petshop/screens/home/widgets/banner.dart';
 import 'package:petshop/screens/home/widgets/list_trending.dart';
 import 'package:petshop/screens/home/widgets/list_browse.dart';
 import 'package:petshop/screens/home/widgets/list_pettype.dart';
@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen>
                 Stack(
                   children: [
                     const seachWidget(),
-                    const banderWidget(),
+                    const bannerWidget(),
                     StatusTrending(),
                     const listTrend(),
                     BrowseStatus(),

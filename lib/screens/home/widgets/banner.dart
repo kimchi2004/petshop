@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class banderWidget extends StatelessWidget {
-  const banderWidget({super.key});
+class bannerWidget extends StatelessWidget {
+  const bannerWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
