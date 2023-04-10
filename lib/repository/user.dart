@@ -32,20 +32,17 @@ void registerUser(User user) async {
 }
 
 class AuthService {
-  final baseUrl = 'https://petstore.swagger.io/v2/user/login?username=a&password=a';
+  final baseUrl = 'https://petstore.swagger.io/v2/user';
 
   Future<bool> login(User user) async {
     final url = '$baseUrl/login';
     final response = await http.post(
       Uri.parse(url),
-      headers: {'Content-Type': 'application/json'},
       body: json.encode(user.toJson()),
     );
     if (response.statusCode == 200) {
-      // Successful login
       return true;
     } else {
-      // Failed login
       return false;
     }
   }
