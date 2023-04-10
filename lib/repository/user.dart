@@ -22,10 +22,9 @@ Future<List<User>> fetchUser() async {
 
 void registerUser(User user) async {
   final url = Uri.parse('https://petstore.swagger.io/v2/user');
-  final headers = {'Content-Type': 'application/json'};
   final body = json.encode(user.toJson());
 
-  final response = await http.post(url, headers: headers, body: body);
+  final response = await http.post(url, body: body);
 
   if (response.statusCode == 200) {
   } else {
