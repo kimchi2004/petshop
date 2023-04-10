@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import '../../../../models/User.dart';
+import '../../../../repository/user.dart';
 import '../../../home/home_screen.dart';
 import '../../register/register.dart';
 
@@ -16,6 +17,9 @@ class _InputState extends State<Input> {
   final TextEditingController _passwordController = TextEditingController();
   bool? rememberMe = false;
   final _formKey = GlobalKey<FormState>();
+  final _user = User(username: '', password: '');
+  final _authService = AuthService();
+
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +46,7 @@ class _InputState extends State<Input> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: TextFormField(
+                          onChanged: (value) => _user.username = value,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return ' Please enter your email';
@@ -73,6 +78,7 @@ class _InputState extends State<Input> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: TextFormField(
+                          onChanged: (value) => _user.password = value,
                           obscureText: true,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -102,7 +108,6 @@ class _InputState extends State<Input> {
                           Checkbox(
                             value: rememberMe!,
                             onChanged: (bool? newValue) {
-                              // accept a nullable boolean value
                               if (newValue != null) {
                                 setState(() {
                                   rememberMe = newValue;
@@ -125,7 +130,7 @@ class _InputState extends State<Input> {
                             child: Text(
                               'Forget password',
                               style: TextStyle(
-                                color: Color(0xff6c63ff),
+                                color: const Color(0xff6c63ff),
                                 fontSize: 11.sp,
                                 fontWeight: FontWeight.w400,
                                 height: 1.2575.h,
@@ -143,13 +148,19 @@ class _InputState extends State<Input> {
                   child: Column(
                     children: [
                       GestureDetector(
-                        onTap: () {
+                        onTap: () async {
                           if (_formKey.currentState!.validate()) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const HomeScreen()),
-                            );
+                            final success = await _authService.login(_user);
+                            if (success) {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(builder: (context) => const HomeScreen()),
+                              );
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('Invalid email or password')),
+                              );
+                            }
                           }
                         },
                         child: Container(
@@ -200,7 +211,7 @@ class _InputState extends State<Input> {
                               fontSize: 13.sp,
                               fontWeight: FontWeight.w300,
                               height: 1.2175.h,
-                              color: Color(0xff252525),
+                              color: const Color(0xff252525),
                             ),
                           ),
                           InkWell(
@@ -217,7 +228,7 @@ class _InputState extends State<Input> {
                                 fontSize: 13.sp,
                                 fontWeight: FontWeight.w700,
                                 height: 1.2175.h,
-                                color: Color(0xff6c63ff),
+                                color: const Color(0xff6c63ff),
                               ),
                             ),
                           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import '../../../../models/User.dart';
+import '../../../../repository/user.dart';
 import '../../login/login.dart';
 
 class InputInfo extends StatefulWidget {
@@ -17,6 +18,9 @@ class _InputInfoState extends State<InputInfo> {
   final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool? rememberMe = false;
+
+
+  final _user = User(username: '',firstName: '',lastName: '', email: '', password: '', phone:'');
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +47,14 @@ class _InputInfoState extends State<InputInfo> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: TextFormField(
+                          onChanged: (value) {
+                            // Split the full name into its constituent parts
+                            final parts = value.trim().split(' ');
+                            if (parts.length == 2) {
+                              _user.firstName = parts[0];
+                              _user.lastName = parts[1];
+                            }
+                          },
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return ' Please enter Full name';
@@ -74,9 +86,15 @@ class _InputInfoState extends State<InputInfo> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: TextFormField(
+                          onChanged: (value) {
+                            _user.username = value;
+                            _user.email = value;
+                          },
                           validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return ' Please enter Valid email';
+                            if (value!.isEmpty) {
+                              return 'Please enter your email';
+                            } else if (!value.contains('@')) {
+                              return 'Please enter a valid email';
                             }
                             return null;
                           },
@@ -105,6 +123,7 @@ class _InputInfoState extends State<InputInfo> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: TextFormField(
+                          onChanged: (value) => _user.phone = value,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return ' Please enter Phone number';
@@ -136,6 +155,8 @@ class _InputInfoState extends State<InputInfo> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: TextFormField(
+                          onChanged: (value) => _user.password = value,
+                          obscureText: true,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return ' Please enter Password';
@@ -186,7 +207,7 @@ class _InputInfoState extends State<InputInfo> {
                             child: Text(
                               'Terms',
                               style: TextStyle(
-                                color: Color(0xff6c63ff),
+                                color: const Color(0xff6c63ff),
                                 fontSize: 9.sp,
                                 fontWeight: FontWeight.w400,
                                 height: 1.2575.h,
@@ -207,7 +228,7 @@ class _InputInfoState extends State<InputInfo> {
                             child: Text(
                               'Conditions',
                               style: TextStyle(
-                                color: Color(0xff6c63ff),
+                                color: const Color(0xff6c63ff),
                                 fontSize: 9.sp,
                                 fontWeight: FontWeight.w400,
                                 height: 1.2575.h,
@@ -226,11 +247,11 @@ class _InputInfoState extends State<InputInfo> {
                       GestureDetector(
                         onTap: () {
                           if (_formKey.currentState!.validate()) {
-                            Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Login()),
-                          );
+                            registerUser(_user);
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) => Login()),
+                            );
                           }
                         },
                         child: Container(
@@ -281,7 +302,7 @@ class _InputInfoState extends State<InputInfo> {
                               fontSize: 13.sp,
                               fontWeight: FontWeight.w300,
                               height: 1.2175.h,
-                              color: Color(0xff252525),
+                              color: const Color(0xff252525),
                             ),
                           ),
                           InkWell(
@@ -298,7 +319,7 @@ class _InputInfoState extends State<InputInfo> {
                                 fontSize: 13.sp,
                                 fontWeight: FontWeight.w700,
                                 height: 1.2175.h,
-                                color: Color(0xff6c63ff),
+                                color: const Color(0xff6c63ff),
                               ),
                             ),
                           ),
