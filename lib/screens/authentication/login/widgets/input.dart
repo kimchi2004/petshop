@@ -49,13 +49,13 @@ class _InputState extends State<Input> {
                           onChanged: (value) => _user.username = value,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return ' Please enter your email';
+                              return ' Please enter your username!';
                             }
                             return null;
                           },
                           controller: _usernameController,
                           decoration: const InputDecoration(
-                              hintText: 'Enter your email',
+                              hintText: 'Username',
                               alignLabelWithHint: true,
                               contentPadding: EdgeInsets.all(20),
                               suffixIcon: Icon(Icons.email_outlined),
@@ -82,7 +82,7 @@ class _InputState extends State<Input> {
                           obscureText: true,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return ' Please enter your Password';
+                              return ' Please enter your Password!';
                             }
                             return null;
                           },
