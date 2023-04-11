@@ -17,7 +17,7 @@ class _InputInfoState extends State<InputInfo> {
   final TextEditingController _phonenumberController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  bool? rememberMe = false;
+  bool _termsAgreed = false;
 
 
   final _user = User(username: '',firstName: '',lastName: '', email: '', password: '', phone:'');
@@ -183,14 +183,11 @@ class _InputInfoState extends State<InputInfo> {
                       Row(
                         children: [
                           Checkbox(
-                            value: rememberMe!,
-                            onChanged: (bool? newValue) {
-                              // accept a nullable boolean value
-                              if (newValue != null) {
-                                setState(() {
-                                  rememberMe = newValue;
-                                });
-                              }
+                            value: _termsAgreed,
+                            onChanged: (newValue) {
+                              setState(() {
+                                _termsAgreed = newValue!;
+                              });
                             },
                           ),
                           Text(
@@ -246,7 +243,7 @@ class _InputInfoState extends State<InputInfo> {
                     children: [
                       GestureDetector(
                         onTap: () async {
-                          if (_formKey.currentState!.validate()) {
+                          if (_formKey.currentState!.validate() && _termsAgreed) {
                             bool usernameExists = await checkUsernameExists(_validemailController.text);
 
                             if (usernameExists) {
