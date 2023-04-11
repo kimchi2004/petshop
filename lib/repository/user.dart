@@ -57,3 +57,15 @@ Future<bool> login(String username, String password) async {
     return false;
   }
 }
+
+Future<bool> checkUsernameExists(String username) async {
+  final response = await http.get(Uri.parse('https://petstore.swagger.io/v2/user/$username'));
+
+  if (response.statusCode == 200) {
+    return true;
+  } else if (response.statusCode == 404) {
+    return false;
+  } else {
+    throw Exception('Failed to check username existence');
+  }
+}

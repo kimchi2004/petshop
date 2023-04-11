@@ -245,13 +245,21 @@ class _InputInfoState extends State<InputInfo> {
                   child: Column(
                     children: [
                       GestureDetector(
-                        onTap: () {
+                        onTap: () async {
                           if (_formKey.currentState!.validate()) {
-                            createUser(_user);
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(builder: (context) => const Login()),
-                            );
+                            bool usernameExists = await checkUsernameExists(_validemailController.text);
+
+                            if (usernameExists) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('Username already exists')),
+                              );
+                            } else {
+                              await createUser(_user);
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(builder: (context) => const Login()),
+                              );
+                            }
                           } else{
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text('Register failed!')),
