@@ -18,7 +18,6 @@ class _InputState extends State<Input> {
   bool? rememberMe = false;
   final _formKey = GlobalKey<FormState>();
   final _user = User(username: '', password: '');
-  final _authService = AuthService();
 
 
   @override
@@ -150,7 +149,7 @@ class _InputState extends State<Input> {
                       GestureDetector(
                         onTap: () async {
                           if (_formKey.currentState!.validate()) {
-                            final success = await _authService.login(_user);
+                            final success = await login(_usernameController.text, _passwordController.text);
                             if (success) {
                               Navigator.pushReplacement(
                                 context,

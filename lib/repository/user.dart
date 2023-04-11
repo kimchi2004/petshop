@@ -10,8 +10,9 @@ List<User> parserUser(String responseBody) {
 }
 
 Future<List<User>> fetchUser() async {
-  final response = await http
-      .get(Uri.parse('https://petstore.swagger.io/v2/user/login?username=a&password=a'));
+  final response = await http.get(Uri.parse('https://petstore.swagger.io/v2/user/chi@gmail.com'));
+  print('Response body: ${response.body}');
+  print('Status code: ${response.statusCode}');
 
   if (response.statusCode == 200) {
     return parserUser(response.body);
@@ -20,27 +21,39 @@ Future<List<User>> fetchUser() async {
   }
 }
 
-class AuthService {
-  final baseUrl = 'https://petstore.swagger.io/v2/user';
+Future<User> createUser(User user) async {
+  final response = await http.post(
+    Uri.parse('https://petstore.swagger.io/v2/user'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(<String, dynamic>{
+      'id': user.id,
+      'username': user.username,
+      'firstName': user.firstName,
+      'lastName': user.lastName,
+      'email': user.email,
+      'password': user.password,
+      'phone': user.phone,
+      'userStatus': 0,
+    }),
+  );
 
-  Future<bool> registerUser(User user) async {
-    final url = Uri.parse(baseUrl);
-    final response = await http.post(url, body: json.encode(user.toJson()));
-
-    if (response.statusCode == 200) {
-      return true;
-    } else {
-      return false;
-    }
+  if (response.statusCode == 200) {
+    return User.fromJson(jsonDecode(response.body));
+  } else {
+    throw Exception('Failed to create user.');
   }
+}
 
-  Future<bool> login(User user) async {
-    final url = '$baseUrl/login';
-    final response = await http.post(Uri.parse(url), body: json.encode(user.toJson()),);
-    if (response.statusCode == 200) {
-      return true;
-    } else {
-      return false;
-    }
+Future<bool> login(String username, String password) async {
+  final response = await http.get(
+    Uri.parse('https://petstore.swagger.io/v2/user/login?username=$username&password=$password'),
+  );
+
+  if (response.statusCode == 200) {
+    return true;
+  } else {
+    return false;
   }
 }
