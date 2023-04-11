@@ -18,6 +18,7 @@ class _InputInfoState extends State<InputInfo> {
   final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool? rememberMe = false;
+  final _authService = AuthService();
 
 
   final _user = User(username: '',firstName: '',lastName: '', email: '', password: '', phone:'');
@@ -247,10 +248,14 @@ class _InputInfoState extends State<InputInfo> {
                       GestureDetector(
                         onTap: () {
                           if (_formKey.currentState!.validate()) {
-                            registerUser(_user);
+                            _authService.registerUser(_user);
                             Navigator.pushReplacement(
                               context,
-                              MaterialPageRoute(builder: (context) => Login()),
+                              MaterialPageRoute(builder: (context) => const Login()),
+                            );
+                          } else{
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Register failed!')),
                             );
                           }
                         },

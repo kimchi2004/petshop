@@ -20,28 +20,23 @@ Future<List<User>> fetchUser() async {
   }
 }
 
-Future<bool> registerUser(User user) async {
-  final url = Uri.parse('https://petstore.swagger.io/v2/user');
-  final body = json.encode(user.toJson());
-
-  final response = await http.post(url, body: body);
-
-  if (response.statusCode == 200) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
 class AuthService {
   final baseUrl = 'https://petstore.swagger.io/v2/user';
 
+  Future<bool> registerUser(User user) async {
+    final url = Uri.parse(baseUrl);
+    final response = await http.post(url, body: json.encode(user.toJson()));
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   Future<bool> login(User user) async {
     final url = '$baseUrl/login';
-    final response = await http.post(
-      Uri.parse(url),
-      body: json.encode(user.toJson()),
-    );
+    final response = await http.post(Uri.parse(url), body: json.encode(user.toJson()),);
     if (response.statusCode == 200) {
       return true;
     } else {
