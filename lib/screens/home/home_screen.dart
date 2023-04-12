@@ -6,6 +6,7 @@ import 'package:petshop/screens/home/widgets/list_browse.dart';
 import 'package:petshop/screens/home/widgets/list_pettype.dart';
 import 'package:petshop/screens/home/widgets/search.dart';
 
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -15,6 +16,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -34,7 +36,6 @@ class _HomeScreenState extends State<HomeScreen>
                     BrowseStatus(),
                     const pettypeList(),
                     const browseList2(),
-                    //bottom(),
                   ],
                 ),
               ],
@@ -44,26 +45,6 @@ class _HomeScreenState extends State<HomeScreen>
       },
     );
   }
-
-  // Positioned bottom() {
-  //   return Positioned(
-  //     left: 139.7062988281,
-  //     top: 853,
-  //     child: Align(
-  //       child: SizedBox(
-  //         width: 134.w,
-  //         height: 5.h,
-  //         child: Container(
-  //           decoration: BoxDecoration(
-  //             borderRadius: BorderRadius.circular(100),
-  //             border: Border.all(color: const Color(0xffe6e6e6)),
-  //             color: Colors.grey,
-  //           ),
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
 
   Container BrowseStatus() {
     return Container(

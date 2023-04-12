@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../models/User.dart';
-import '../../../../repository/user.dart';
 import '../../../home/home_screen.dart';
 import '../../register/register.dart';
 
@@ -15,10 +15,77 @@ class Input extends StatefulWidget {
 class _InputState extends State<Input> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  bool? rememberMe = false;
+  bool _rememberMe = false;
   final _formKey = GlobalKey<FormState>();
   final _user = User(username: '', password: '');
 
+  @override
+  void initState() {
+    super.initState();
+    _loadSaveCredentials();
+  }
+
+  Future<void> _loadSaveCredentials() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool rememberMe = prefs.getBool('rememberMe') ?? false;
+    if (rememberMe) {
+      String username = prefs.getString('username') ?? '';
+      String password = prefs.getString('password') ?? '';
+      setState(() {
+        _usernameController.text = username;
+        _passwordController.text = password;
+        _rememberMe = true;
+      });
+    }
+  }
+
+  Future<void> _saveCredentials() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (_rememberMe) {
+      await prefs.setString('username', _usernameController.text);
+      await prefs.setString('password', _passwordController.text);
+    } else {
+      await prefs.remove('username');
+      await prefs.remove('password');
+    }
+    await prefs.setBool('rememberMe', _rememberMe);
+  }
+
+  void _onRememberMeChanged(bool? value) {
+    setState(() {
+      _rememberMe = _rememberMe = value ?? false;
+      ;
+    });
+  }
+
+  void _onLoginPressed() {
+    String email = _usernameController.text;
+    String password = _passwordController.text;
+    if (email.isNotEmpty && password.isNotEmpty) {
+      _saveCredentials();
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const HomeScreen()),
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('Invalid Credentials'),
+          content: Text('Please enter a valid email and password.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const HomeScreen()),
+              ),
+              child: Text('OK'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,14 +172,8 @@ class _InputState extends State<Input> {
                       Row(
                         children: [
                           Checkbox(
-                            value: rememberMe!,
-                            onChanged: (bool? newValue) {
-                              if (newValue != null) {
-                                setState(() {
-                                  rememberMe = newValue;
-                                });
-                              }
-                            },
+                            value: _rememberMe,
+                            onChanged: _onRememberMeChanged,
                           ),
                           Text(
                             'Remember me',
@@ -147,21 +208,7 @@ class _InputState extends State<Input> {
                   child: Column(
                     children: [
                       GestureDetector(
-                        onTap: () async {
-                          if (_formKey.currentState!.validate()) {
-                            final success = await login(_usernameController.text, _passwordController.text);
-                            if (success) {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(builder: (context) => const HomeScreen()),
-                              );
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('Invalid email or password')),
-                              );
-                            }
-                          }
-                        },
+                        onTap: _onLoginPressed,
                         child: Container(
                             padding: EdgeInsets.fromLTRB(15.w, 0.h, 15.w, 15.h),
                             margin: EdgeInsets.fromLTRB(0.w, 0.h, 1.w, 23.h),
