@@ -17,7 +17,7 @@ class User {
     this.password,
     this.phone,
     this.userStatus,
-});
+  });
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -30,7 +30,7 @@ class User {
     userStatus = json['userStatus'];
   }
 
-  Map<String, dynamic> toJson(){
+  Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['username'] = this.username;
@@ -41,5 +41,18 @@ class User {
     data['phone'] = this.phone;
     data['userStatus'] = this.userStatus;
     return data;
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'username': username,
+      'firstName': firstName,
+      'lastName': lastName,
+      'email': email,
+      'password': password,
+      'phone': phone,
+      'userStatus': userStatus,
+    };
   }
 }

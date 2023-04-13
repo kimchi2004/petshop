@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,78 +15,79 @@ class Input extends StatefulWidget {
 }
 
 class _InputState extends State<Input> {
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  bool _rememberMe = false;
+  late TextEditingController _usernameController = TextEditingController();
+  late TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  final _user = User(username: '', password: '');
+  late List<User> _userList;
+  late User _selectedUser;
+  late bool _rememberMe;
 
   @override
   void initState() {
     super.initState();
-    _loadSaveCredentials();
+    _userList = [];
+    _selectedUser = User(email: '', password: '');
+    _usernameController = TextEditingController();
+    _passwordController = TextEditingController();
+    _rememberMe = false;
+    _loadSavedUsers();
   }
 
-  Future<void> _loadSaveCredentials() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool rememberMe = prefs.getBool('rememberMe') ?? false;
-    if (rememberMe) {
-      String username = prefs.getString('username') ?? '';
-      String password = prefs.getString('password') ?? '';
-      setState(() {
-        _usernameController.text = username;
-        _passwordController.text = password;
-        _rememberMe = true;
-      });
-    }
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 
-  Future<void> _saveCredentials() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (_rememberMe) {
-      await prefs.setString('username', _usernameController.text);
-      await prefs.setString('password', _passwordController.text);
-    } else {
-      await prefs.remove('username');
-      await prefs.remove('password');
-    }
-    await prefs.setBool('rememberMe', _rememberMe);
-  }
-
-  void _onRememberMeChanged(bool? value) {
+  Future<void> _loadSavedUsers() async {
+    final prefs = await SharedPreferences.getInstance();
+    final userListJson = prefs.getStringList('userList') ?? [];
+    final List<User> userList = userListJson
+        .map((userJson) => User.fromJson(json.decode(userJson)))
+        .toList();
     setState(() {
-      _rememberMe = _rememberMe = value ?? false;
-      ;
+      _userList = userList;
     });
   }
 
-  void _onLoginPressed() {
-    String email = _usernameController.text;
-    String password = _passwordController.text;
-    if (email.isNotEmpty && password.isNotEmpty) {
-      _saveCredentials();
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
-      );
+  Future<void> _saveCredentials() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (_rememberMe) {
+      _userList.add(_selectedUser);
+      final userListJson = _userList
+          .map((user) => json.encode(user.toJson()))
+          .toList();
+      prefs.setStringList('userList', userListJson);
     } else {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text('Invalid Credentials'),
-          content: Text('Please enter a valid email and password.'),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => const HomeScreen()),
-              ),
-              child: Text('OK'),
-            ),
-          ],
-        ),
-      );
+      prefs.remove('userList');
     }
+  }
+
+  List<DropdownMenuItem<User>> _getUserDropdownItems(List<User> users) {
+    Set<User> uniqueUsers = Set<User>.from(users);
+    List<DropdownMenuItem<User>> items = uniqueUsers.map((user) {
+      return DropdownMenuItem<User>(
+        value: user,
+        child: Text(user.username ?? ''),
+      );
+    }).toList();
+    return items;
+  }
+
+  void _onLoginPressed() {
+    _saveCredentials();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (BuildContext context) => const HomeScreen(),
+      ),
+    );
+  }
+
+  Future<void> deleteAllUsers() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove('userList');
   }
 
   @override
@@ -104,6 +107,19 @@ class _InputState extends State<Input> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      DropdownButtonFormField<User>(
+                        items: _getUserDropdownItems(_userList),
+                        hint: Text('Select an account'),
+                        value: _selectedUser.username?.isNotEmpty == true ? _selectedUser : null,
+                        onChanged: (value) {
+                          setState(() {
+                            _selectedUser = value!;
+                            _usernameController.text = _selectedUser.username ?? '';
+                            _passwordController.text = _selectedUser.password ?? '';
+                            _rememberMe = true;
+                          });
+                        },
+                      ),
                       Container(
                         width: 400.w,
                         height: 50.h,
@@ -112,7 +128,7 @@ class _InputState extends State<Input> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: TextFormField(
-                          onChanged: (value) => _user.username = value,
+                          keyboardType: TextInputType.emailAddress,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return ' Please enter your username!';
@@ -127,12 +143,12 @@ class _InputState extends State<Input> {
                               suffixIcon: Icon(Icons.email_outlined),
                               focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                color: Colors.transparent,
-                              )),
+                                    color: Colors.transparent,
+                                  )),
                               enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                color: Colors.transparent,
-                              ))),
+                                    color: Colors.transparent,
+                                  ))),
                         ),
                       ),
                       SizedBox(height: 16.0.h),
@@ -144,7 +160,6 @@ class _InputState extends State<Input> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: TextFormField(
-                          onChanged: (value) => _user.password = value,
                           obscureText: true,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -160,12 +175,12 @@ class _InputState extends State<Input> {
                               suffixIcon: Icon(Icons.lock_outline),
                               focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                color: Colors.transparent,
-                              )),
+                                    color: Colors.transparent,
+                                  )),
                               enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                color: Colors.transparent,
-                              ))),
+                                    color: Colors.transparent,
+                                  ))),
                         ),
                       ),
                       SizedBox(height: 16.0.h),
@@ -173,7 +188,11 @@ class _InputState extends State<Input> {
                         children: [
                           Checkbox(
                             value: _rememberMe,
-                            onChanged: _onRememberMeChanged,
+                            onChanged: (value) {
+                              setState(() {
+                                _rememberMe = value!;
+                              });
+                            },
                           ),
                           Text(
                             'Remember me',
@@ -220,7 +239,7 @@ class _InputState extends State<Input> {
                             ),
                             child: Container(
                               padding:
-                                  EdgeInsets.fromLTRB(100.w, 0.h, 100.w, 0.h),
+                              EdgeInsets.fromLTRB(100.w, 0.h, 100.w, 0.h),
                               margin: EdgeInsets.fromLTRB(0.w, 5.h, 11.w, 0.h),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -236,7 +255,7 @@ class _InputState extends State<Input> {
                                   ),
                                   Container(
                                     margin:
-                                        EdgeInsets.fromLTRB(0.w, 5.h, 0.w, 0.h),
+                                    EdgeInsets.fromLTRB(0.w, 5.h, 0.w, 0.h),
                                     child: const Icon(
                                       Icons.chevron_right,
                                       color: Color(0xfffbfbfb),
