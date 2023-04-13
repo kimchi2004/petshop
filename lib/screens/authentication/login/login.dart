@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:petshop/screens/Authentication/login/widgets/banner.dart';
-import 'package:petshop/screens/Authentication/login/widgets/input.dart';
+import 'package:petshop/screens/authentication/login/widgets/input.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -24,7 +24,7 @@ class _LoginState extends State<Login> {
                 Stack(
                   children: const [
                     BannerLogin(),
-                    Input(),
+                    InputComponent()
                     //bottom(),
                   ],
                 ),

@@ -7,14 +7,14 @@ import '../../../../models/User.dart';
 import '../../../home/home_screen.dart';
 import '../../register/register.dart';
 
-class Input extends StatefulWidget {
-  const Input({Key? key}) : super(key: key);
+class InputComponent extends StatefulWidget {
+  const InputComponent({Key? key}) : super(key: key);
 
   @override
-  State<Input> createState() => _InputState();
+  State<InputComponent> createState() => _InputState();
 }
 
-class _InputState extends State<Input> {
+class _InputState extends State<InputComponent> {
   late TextEditingController _usernameController = TextEditingController();
   late TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -55,9 +55,8 @@ class _InputState extends State<Input> {
     final prefs = await SharedPreferences.getInstance();
     if (_rememberMe) {
       _userList.add(_selectedUser);
-      final userListJson = _userList
-          .map((user) => json.encode(user.toJson()))
-          .toList();
+      final userListJson =
+          _userList.map((user) => json.encode(user.toJson())).toList();
       prefs.setStringList('userList', userListJson);
     } else {
       prefs.remove('userList');
@@ -76,18 +75,24 @@ class _InputState extends State<Input> {
   }
 
   void _onLoginPressed() {
+    _fillToBox();
     _saveCredentials();
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (BuildContext context) => const HomeScreen(),
-      ),
-    );
+    // Navigator.pushReplacement(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (BuildContext context) => const HomeScreen(),
+    //   ),
+    // );
   }
 
   Future<void> deleteAllUsers() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.remove('userList');
+  }
+
+  void _fillToBox() {
+    _selectedUser.username = _usernameController.text;
+    _selectedUser.password = _passwordController.text;
   }
 
   @override
@@ -110,12 +115,16 @@ class _InputState extends State<Input> {
                       DropdownButtonFormField<User>(
                         items: _getUserDropdownItems(_userList),
                         hint: Text('Select an account'),
-                        value: _selectedUser.username?.isNotEmpty == true ? _selectedUser : null,
+                        value: _selectedUser.username?.isNotEmpty == true
+                            ? _selectedUser
+                            : null,
                         onChanged: (value) {
                           setState(() {
                             _selectedUser = value!;
-                            _usernameController.text = _selectedUser.username ?? '';
-                            _passwordController.text = _selectedUser.password ?? '';
+                            _usernameController.text =
+                                _selectedUser.username ?? '';
+                            _passwordController.text =
+                                _selectedUser.password ?? '';
                             _rememberMe = true;
                           });
                         },
@@ -143,12 +152,12 @@ class _InputState extends State<Input> {
                               suffixIcon: Icon(Icons.email_outlined),
                               focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Colors.transparent,
-                                  )),
+                                color: Colors.transparent,
+                              )),
                               enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Colors.transparent,
-                                  ))),
+                                color: Colors.transparent,
+                              ))),
                         ),
                       ),
                       SizedBox(height: 16.0.h),
@@ -175,12 +184,12 @@ class _InputState extends State<Input> {
                               suffixIcon: Icon(Icons.lock_outline),
                               focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Colors.transparent,
-                                  )),
+                                color: Colors.transparent,
+                              )),
                               enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Colors.transparent,
-                                  ))),
+                                color: Colors.transparent,
+                              ))),
                         ),
                       ),
                       SizedBox(height: 16.0.h),
@@ -239,7 +248,7 @@ class _InputState extends State<Input> {
                             ),
                             child: Container(
                               padding:
-                              EdgeInsets.fromLTRB(100.w, 0.h, 100.w, 0.h),
+                                  EdgeInsets.fromLTRB(100.w, 0.h, 100.w, 0.h),
                               margin: EdgeInsets.fromLTRB(0.w, 5.h, 11.w, 0.h),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -255,7 +264,7 @@ class _InputState extends State<Input> {
                                   ),
                                   Container(
                                     margin:
-                                    EdgeInsets.fromLTRB(0.w, 5.h, 0.w, 0.h),
+                                        EdgeInsets.fromLTRB(0.w, 5.h, 0.w, 0.h),
                                     child: const Icon(
                                       Icons.chevron_right,
                                       color: Color(0xfffbfbfb),
