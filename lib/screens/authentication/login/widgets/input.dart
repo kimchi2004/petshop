@@ -77,12 +77,12 @@ class _InputState extends State<InputComponent> {
   void _onLoginPressed() {
     _fillToBox();
     _saveCredentials();
-    // Navigator.pushReplacement(
-    //   context,
-    //   MaterialPageRoute(
-    //     builder: (BuildContext context) => const HomeScreen(),
-    //   ),
-    // );
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (BuildContext context) => const HomeScreen(),
+      ),
+    );
   }
 
   Future<void> deleteAllUsers() async {
