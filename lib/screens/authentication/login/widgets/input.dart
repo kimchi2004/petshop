@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../models/User.dart';
+import 'package:http/http.dart' as http;
 import '../../../home/home_screen.dart';
 import '../../register/register.dart';
 
 class InputComponent extends StatefulWidget {
-  const InputComponent({Key? key}) : super(key: key);
+  final Function(String, String) onLogin;
+  const InputComponent({Key? key, required this.onLogin}) : super(key: key);
 
   @override
   State<InputComponent> createState() => _InputState();
@@ -76,20 +78,87 @@ class _InputState extends State<InputComponent> {
     }).toList();
     return items;
   }
-  void _onLoginPressed() {
+
+
+  Future<bool> _login(String username, String password) async {
+    setState(() {
+    });
+
+    final response = await http.get(
+      Uri.parse('https://petstore.swagger.io/v2/user/login?username=$username&password=$password'),
+    );
+
+    setState(() {
+    });
+
+    if (response.statusCode == 200) {
+      _saveToken(response.body);
+      setState(() {
+      });
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<void> _saveToken(String token) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('token', token);
+  }
+
+  void _handleLogin() {
     _fillToBox();
     _saveCredentials();
-      if (_formKey.currentState!.validate()) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (BuildContext context) => const HomeScreen(),),
-        );
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Login failed!')),
-        );
-      }
+    if (_formKey.currentState!.validate()) {
+      setState(() {
+      });
+      _login(_usernameController.text, _passwordController.text)
+          .then((success) {
+        setState(() {
+        });
+        if (success) {
+          _saveToken('token').then((_) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (BuildContext context) => const HomeScreen()),
+            );
+          });
+        } else {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: const Text('Login Failed'),
+                  content: const Text('Please check your credentials and try again.'),
+                  actions: <Widget>[
+                    TextButton(
+                      child: const Text('OK'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    )
+                  ],
+                );
+              });
+        }
+      });
+    }
   }
+
+  // void _onLoginPressed() {
+  //   _fillToBox();
+  //   _saveCredentials();
+  //     if (_formKey.currentState!.validate()) {
+  //       Navigator.pushReplacement(
+  //         context,
+  //         MaterialPageRoute(builder: (BuildContext context) => const HomeScreen(),),
+  //       );
+  //     } else {
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //         const SnackBar(content: Text('Login failed!')),
+  //       );
+  //     }
+  // }
 
   List<User> _removeDuplicateUsers(List<User> userList) {
     List<User> uniqueUsers = [];
@@ -275,7 +344,7 @@ class _InputState extends State<InputComponent> {
                   child: Column(
                     children: [
                       GestureDetector(
-                        onTap: _onLoginPressed,
+                        onTap: _handleLogin,
                         child: Container(
                             padding: EdgeInsets.fromLTRB(15.w, 0.h, 15.w, 15.h),
                             margin: EdgeInsets.fromLTRB(0.w, 0.h, 1.w, 23.h),

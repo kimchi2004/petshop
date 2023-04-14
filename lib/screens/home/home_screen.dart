@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:petshop/screens/Authentication/login/login.dart';
 import 'package:petshop/screens/home/widgets/banner.dart';
 import 'package:petshop/screens/home/widgets/list_trending.dart';
 import 'package:petshop/screens/home/widgets/list_browse.dart';
 import 'package:petshop/screens/home/widgets/list_pettype.dart';
 import 'package:petshop/screens/home/widgets/search.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -17,6 +19,26 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
 
+  bool _isLoading = false;
+  String _token = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _checkToken();
+  }
+
+  Future<void> _checkToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString('token') ?? '';
+    if (token.isNotEmpty) {
+      setState(() {
+        _token = token;
+      });
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -25,22 +47,27 @@ class _HomeScreenState extends State<HomeScreen>
       builder: (BuildContext context, Widget? child) {
         return Scaffold(
           body: SingleChildScrollView(
-            child: Column(
-              children: [
-                Stack(
-                  children: [
-                    const seachWidget(),
-                    const bannerWidget(),
-                    StatusTrending(),
-                    const listTrend(),
-                    BrowseStatus(),
-                    const pettypeList(),
-                    const browseList2(),
-                  ],
-                ),
-              ],
-            ),
-          ),
+            child: _isLoading
+                ? Center(child: CircularProgressIndicator())
+                : _token.isNotEmpty
+                ? Center(
+              child: Column(
+                children: [
+                  Stack(
+                    children: [
+                      const seachWidget(),
+                      const bannerWidget(),
+                      StatusTrending(),
+                      const listTrend(),
+                      BrowseStatus(),
+                      const pettypeList(),
+                      const browseList2(),
+                    ],
+                  ),
+                ],
+              ),
+            ): const Login(),
+          )
         );
       },
     );

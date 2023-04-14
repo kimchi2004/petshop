@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:petshop/screens/account/account_screen.dart';
 
 // ignore: camel_case_types
 class browseList2 extends StatelessWidget {
@@ -14,7 +15,7 @@ class browseList2 extends StatelessWidget {
         splitScreenMode: true,
         builder: (BuildContext context, Widget? child) {
         return Container(
-          padding: EdgeInsets.fromLTRB(0.w, 648.h, 0.w,0.h),
+          padding: EdgeInsets.fromLTRB(0.w, 645.h, 0.w,0.h),
           child: Container(
             width: 414.w,
             height: 52.h,
@@ -111,16 +112,21 @@ class browseList2 extends StatelessWidget {
                 ),
                 Container(
                   padding: EdgeInsets.fromLTRB(300.w, 0.h, 10.w, 0.h),
+                  margin: EdgeInsets.fromLTRB(0.w, 0.h, 10.w, 0.h),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Container(
-                          margin: EdgeInsets.fromLTRB(0.w, 0.h, 10.w, 9.h),
-                          width: 16.04.w,
-                          height: 11.h,
-                          child: const Icon(
-                            Icons.account_circle_outlined,
-                          )),
+                      Positioned(
+                          child: IconButton(
+                            icon: const Icon(Icons.account_circle_outlined,),
+                            onPressed: () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(builder: (BuildContext context) => const AccountScreen()),
+                                );
+                            },
+                          ),
+                          ),
                       Text(
                         'Account',
                         textAlign: TextAlign.center,
