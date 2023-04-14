@@ -158,7 +158,7 @@ class _InputState extends State<InputComponent> {
                             ),
                           if(_showTextFormField == false)
                           IconButton(
-                            icon: Icon(Icons.add),
+                            icon: const Icon(Icons.add),
                             onPressed: () {
                               setState(() {
                                 _showTextFormField = true;
