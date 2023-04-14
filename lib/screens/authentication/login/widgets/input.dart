@@ -21,6 +21,7 @@ class _InputState extends State<InputComponent> {
   late List<User> _userList;
   late User _selectedUser;
   late bool _rememberMe;
+  bool _showTextFormField = false;
 
   @override
   void initState() {
@@ -55,8 +56,10 @@ class _InputState extends State<InputComponent> {
     final prefs = await SharedPreferences.getInstance();
     if (_rememberMe) {
       _userList.add(_selectedUser);
-      final userListJson =
-          _userList.map((user) => json.encode(user.toJson())).toList();
+      _userList = _removeDuplicateUsers(_userList);
+      final userListJson = _userList
+          .map((user) => json.encode(user.toJson()))
+          .toList();
       prefs.setStringList('userList', userListJson);
     } else {
       prefs.remove('userList');
@@ -73,22 +76,37 @@ class _InputState extends State<InputComponent> {
     }).toList();
     return items;
   }
-
   void _onLoginPressed() {
     _fillToBox();
     _saveCredentials();
-    // Navigator.pushReplacement(
-    //   context,
-    //   MaterialPageRoute(
-    //     builder: (BuildContext context) => const HomeScreen(),
-    //   ),
-    // );
+      if (_formKey.currentState!.validate()) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (BuildContext context) => const HomeScreen(),),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Login failed!')),
+        );
+      }
   }
 
-  Future<void> deleteAllUsers() async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.remove('userList');
+  List<User> _removeDuplicateUsers(List<User> userList) {
+    List<User> uniqueUsers = [];
+    Set<String> uniqueUsernames = {};
+    for (var user in userList) {
+      if (!uniqueUsernames.contains(user.username)) {
+        uniqueUsers.add(user);
+        uniqueUsernames.add(user.username ?? '');
+      }
+    }
+    return uniqueUsers;
   }
+
+  // Future<void> deleteAllUsers() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   prefs.remove('userList');
+  // }
 
   void _fillToBox() {
     _selectedUser.username = _usernameController.text;
@@ -112,54 +130,75 @@ class _InputState extends State<InputComponent> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      DropdownButtonFormField<User>(
-                        items: _getUserDropdownItems(_userList),
-                        hint: Text('Select an account'),
-                        value: _selectedUser.username?.isNotEmpty == true
-                            ? _selectedUser
-                            : null,
-                        onChanged: (value) {
-                          setState(() {
-                            _selectedUser = value!;
-                            _usernameController.text =
-                                _selectedUser.username ?? '';
-                            _passwordController.text =
-                                _selectedUser.password ?? '';
-                            _rememberMe = true;
-                          });
-                        },
+                      Row(
+                        children: [
+                          if(_showTextFormField == false)
+                            Container(
+                              width: 270.w,
+                              height: 50.h,
+                              child: DropdownButtonFormField<User>(
+                                items: _getUserDropdownItems(_userList),
+                                hint: const Text('Select an account'),
+                                value: _selectedUser.username?.isNotEmpty == true
+                                    ? _selectedUser
+                                    : null,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _selectedUser = value!;
+                                    _showTextFormField = false;
+                                    _usernameController.text =
+                                        _selectedUser.username ?? '';
+                                    _passwordController.text =
+                                        _selectedUser.password ?? '';
+                                    _rememberMe = true;
+                                    _showTextFormField=false;
+                                  });
+                                },
+                              ),
+                            ),
+                          if(_showTextFormField == false)
+                          IconButton(
+                            icon: Icon(Icons.add),
+                            onPressed: () {
+                              setState(() {
+                                _showTextFormField = true;
+                              });
+                            },
+                          ),
+                        ],
                       ),
-                      Container(
-                        width: 400.w,
-                        height: 50.h,
-                        decoration: BoxDecoration(
-                          color: const Color(0x33c4c4c4),
-                          borderRadius: BorderRadius.circular(10),
+                      if (_showTextFormField)
+                        Container(
+                          width: 400.w,
+                          height: 50.h,
+                          decoration: BoxDecoration(
+                            color: const Color(0x33c4c4c4),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: TextFormField(
+                            keyboardType: TextInputType.emailAddress,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return ' Please enter your username!';
+                              }
+                              return null;
+                            },
+                            controller: _usernameController,
+                            decoration: const InputDecoration(
+                                hintText: 'Username',
+                                alignLabelWithHint: true,
+                                contentPadding: EdgeInsets.all(20),
+                                suffixIcon: Icon(Icons.email_outlined),
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                    )),
+                                enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                    ))),
+                          ),
                         ),
-                        child: TextFormField(
-                          keyboardType: TextInputType.emailAddress,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return ' Please enter your username!';
-                            }
-                            return null;
-                          },
-                          controller: _usernameController,
-                          decoration: const InputDecoration(
-                              hintText: 'Username',
-                              alignLabelWithHint: true,
-                              contentPadding: EdgeInsets.all(20),
-                              suffixIcon: Icon(Icons.email_outlined),
-                              focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                color: Colors.transparent,
-                              )),
-                              enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                color: Colors.transparent,
-                              ))),
-                        ),
-                      ),
                       SizedBox(height: 16.0.h),
                       Container(
                         width: 400.w,
@@ -184,12 +223,12 @@ class _InputState extends State<InputComponent> {
                               suffixIcon: Icon(Icons.lock_outline),
                               focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                color: Colors.transparent,
-                              )),
+                                    color: Colors.transparent,
+                                  )),
                               enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                color: Colors.transparent,
-                              ))),
+                                    color: Colors.transparent,
+                                  ))),
                         ),
                       ),
                       SizedBox(height: 16.0.h),
@@ -248,7 +287,7 @@ class _InputState extends State<InputComponent> {
                             ),
                             child: Container(
                               padding:
-                                  EdgeInsets.fromLTRB(100.w, 0.h, 100.w, 0.h),
+                              EdgeInsets.fromLTRB(100.w, 0.h, 100.w, 0.h),
                               margin: EdgeInsets.fromLTRB(0.w, 5.h, 11.w, 0.h),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -264,7 +303,7 @@ class _InputState extends State<InputComponent> {
                                   ),
                                   Container(
                                     margin:
-                                        EdgeInsets.fromLTRB(0.w, 5.h, 0.w, 0.h),
+                                    EdgeInsets.fromLTRB(0.w, 5.h, 0.w, 0.h),
                                     child: const Icon(
                                       Icons.chevron_right,
                                       color: Color(0xfffbfbfb),
