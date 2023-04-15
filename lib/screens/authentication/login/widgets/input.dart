@@ -59,9 +59,8 @@ class _InputState extends State<InputComponent> {
     if (_rememberMe) {
       _userList.add(_selectedUser);
       _userList = _removeDuplicateUsers(_userList);
-      final userListJson = _userList
-          .map((user) => json.encode(user.toJson()))
-          .toList();
+      final userListJson =
+          _userList.map((user) => json.encode(user.toJson())).toList();
       prefs.setStringList('userList', userListJson);
     } else {
       prefs.remove('userList');
@@ -79,22 +78,13 @@ class _InputState extends State<InputComponent> {
     return items;
   }
 
-
   Future<bool> _login(String username, String password) async {
-    setState(() {
-    });
-
     final response = await http.get(
-      Uri.parse('https://petstore.swagger.io/v2/user/login?username=$username&password=$password'),
+      Uri.parse(
+          'https://petstore.swagger.io/v2/user/login?username=$username&password=$password'),
     );
-
-    setState(() {
-    });
-
     if (response.statusCode == 200) {
       _saveToken(response.body);
-      setState(() {
-      });
       return true;
     } else {
       return false;
@@ -110,17 +100,16 @@ class _InputState extends State<InputComponent> {
     _fillToBox();
     _saveCredentials();
     if (_formKey.currentState!.validate()) {
-      setState(() {
-      });
+      setState(() {});
       _login(_usernameController.text, _passwordController.text)
           .then((success) {
-        setState(() {
-        });
+        setState(() {});
         if (success) {
           _saveToken('token').then((_) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (BuildContext context) => const HomeScreen()),
+              MaterialPageRoute(
+                  builder: (BuildContext context) => const HomeScreen()),
             );
           });
         } else {
@@ -129,7 +118,8 @@ class _InputState extends State<InputComponent> {
               builder: (BuildContext context) {
                 return AlertDialog(
                   title: const Text('Login Failed'),
-                  content: const Text('Please check your credentials and try again.'),
+                  content: const Text(
+                      'Please check your credentials and try again.'),
                   actions: <Widget>[
                     TextButton(
                       child: const Text('OK'),
@@ -201,16 +191,17 @@ class _InputState extends State<InputComponent> {
                     children: [
                       Row(
                         children: [
-                          if(_showTextFormField == false)
+                          if (_showTextFormField == false)
                             Container(
                               width: 270.w,
                               height: 50.h,
                               child: DropdownButtonFormField<User>(
                                 items: _getUserDropdownItems(_userList),
                                 hint: const Text('Select an account'),
-                                value: _selectedUser.username?.isNotEmpty == true
-                                    ? _selectedUser
-                                    : null,
+                                value:
+                                    _selectedUser.username?.isNotEmpty == true
+                                        ? _selectedUser
+                                        : null,
                                 onChanged: (value) {
                                   setState(() {
                                     _selectedUser = value!;
@@ -220,20 +211,20 @@ class _InputState extends State<InputComponent> {
                                     _passwordController.text =
                                         _selectedUser.password ?? '';
                                     _rememberMe = true;
-                                    _showTextFormField=false;
+                                    _showTextFormField = false;
                                   });
                                 },
                               ),
                             ),
-                          if(_showTextFormField == false)
-                          IconButton(
-                            icon: const Icon(Icons.add),
-                            onPressed: () {
-                              setState(() {
-                                _showTextFormField = true;
-                              });
-                            },
-                          ),
+                          if (_showTextFormField == false)
+                            IconButton(
+                              icon: const Icon(Icons.add),
+                              onPressed: () {
+                                setState(() {
+                                  _showTextFormField = true;
+                                });
+                              },
+                            ),
                         ],
                       ),
                       if (_showTextFormField)
@@ -260,12 +251,12 @@ class _InputState extends State<InputComponent> {
                                 suffixIcon: Icon(Icons.email_outlined),
                                 focusedBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                    )),
+                                  color: Colors.transparent,
+                                )),
                                 enabledBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                    ))),
+                                  color: Colors.transparent,
+                                ))),
                           ),
                         ),
                       SizedBox(height: 16.0.h),
@@ -292,12 +283,12 @@ class _InputState extends State<InputComponent> {
                               suffixIcon: Icon(Icons.lock_outline),
                               focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Colors.transparent,
-                                  )),
+                                color: Colors.transparent,
+                              )),
                               enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Colors.transparent,
-                                  ))),
+                                color: Colors.transparent,
+                              ))),
                         ),
                       ),
                       SizedBox(height: 16.0.h),
@@ -356,7 +347,7 @@ class _InputState extends State<InputComponent> {
                             ),
                             child: Container(
                               padding:
-                              EdgeInsets.fromLTRB(100.w, 0.h, 100.w, 0.h),
+                                  EdgeInsets.fromLTRB(100.w, 0.h, 100.w, 0.h),
                               margin: EdgeInsets.fromLTRB(0.w, 5.h, 11.w, 0.h),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -372,7 +363,7 @@ class _InputState extends State<InputComponent> {
                                   ),
                                   Container(
                                     margin:
-                                    EdgeInsets.fromLTRB(0.w, 5.h, 0.w, 0.h),
+                                        EdgeInsets.fromLTRB(0.w, 5.h, 0.w, 0.h),
                                     child: const Icon(
                                       Icons.chevron_right,
                                       color: Color(0xfffbfbfb),
