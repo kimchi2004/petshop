@@ -110,36 +110,34 @@ class browseList2 extends StatelessWidget {
                     ],
                   ),
                 ),
-                InkWell(
-                  onTap: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (BuildContext context) => const AccountScreen()),
-                    );
-                  },
-                  child: Container(
-                    padding: EdgeInsets.fromLTRB(300.w, 0.h, 10.w, 0.h),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.fromLTRB(0.w, 0.h, 10.w, 0.h),
-                            child: const Icon(
-                              Icons.account_circle_outlined,
-                            ),
-                            ),
-                        Text(
-                          'Account',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 10.sp,
-                            fontWeight: FontWeight.w400,
-                            height: 1.2575.h,
-                            color: const Color(0xff181725),
+                Container(
+                  padding: EdgeInsets.fromLTRB(300.w, 0.h, 10.w, 0.h),
+                  margin: EdgeInsets.fromLTRB(0.w, 0.h, 10.w, 0.h),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Positioned(
+                          child: IconButton(
+                            icon: const Icon(Icons.account_circle_outlined,),
+                            onPressed: () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(builder: (BuildContext context) => const AccountScreen()),
+                                );
+                            },
                           ),
+                          ),
+                      Text(
+                        'Account',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 10.sp,
+                          fontWeight: FontWeight.w400,
+                          height: 1.2575.h,
+                          color: const Color(0xff181725),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ],
