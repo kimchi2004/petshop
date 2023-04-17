@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:petshop/screens/Authentication/login/login.dart';
+import 'package:petshop/screens/home/home_screen.dart';
 void main() {
   runApp(const MaterialApp(
-    //home: HomeScreen(),
-    home: Login(),
+    home: HomeScreen(),
+    //home: Login(),
     debugShowCheckedModeBanner: false,
   ));
 }

@@ -81,9 +81,6 @@ class _InputState extends State<InputComponent> {
 
 
   Future<bool> _login(String username, String password) async {
-    setState(() {
-    });
-
     final response = await http.get(
       Uri.parse('https://petstore.swagger.io/v2/user/login?username=$username&password=$password'),
     );
@@ -106,9 +103,15 @@ class _InputState extends State<InputComponent> {
     await prefs.setString('token', token);
   }
 
+  Future<void> _saveUsername(String username) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('username', username);
+  }
+
   void _handleLogin() {
     _fillToBox();
     _saveCredentials();
+    _saveUsername(_usernameController.text);
     if (_formKey.currentState!.validate()) {
       setState(() {
       });

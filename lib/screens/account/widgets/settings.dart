@@ -47,7 +47,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
       splitScreenMode: true,
       builder: (BuildContext context, Widget? child) {
         return Container(
-          padding: EdgeInsets.fromLTRB(20.w, 480.h, 20.w, 0.h),
+          padding: EdgeInsets.fromLTRB(20.w, 400.h, 20.w, 0.h),
           child:
           SizedBox(
             width:  342.w,
@@ -65,7 +65,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                     Text(
                       'SETTINGS',
                       style:  TextStyle (
-                        fontSize:  14.sp,
+                        fontSize:  16.sp,
                         fontWeight:  FontWeight.w400,
                         height:  1.4285714286,
                         letterSpacing:  0.25,

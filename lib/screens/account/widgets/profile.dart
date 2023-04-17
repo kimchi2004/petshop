@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -9,6 +13,46 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  String _username = '';
+  String _name = '';
+  String _surname = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _getAccountInfo();
+  }
+
+  Future<String> _retrieveToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('token') ?? '';
+  }
+
+  Future<String> _getUsername() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('username') ?? '';
+  }
+
+  Future<void> _getAccountInfo() async {
+    String token = await _retrieveToken();
+    String username = await _getUsername();
+    if (token.isNotEmpty) {
+      String apiUrl = 'https://petstore.swagger.io/v2/user/$username';
+      Map<String, String> headers = {
+        'Authorization': 'Bearer $token',
+      };
+      http.Response response = await http.get(Uri.parse(apiUrl), headers: headers);
+      if (response.statusCode == 200) {
+        Map<String, dynamic> userData = jsonDecode(response.body);
+        setState(() {
+          _username = '${userData['username']}';
+          _name = '${userData['firstName']}';
+          _surname='${userData['lastName']}';
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -16,7 +60,7 @@ class _ProfileState extends State<Profile> {
         splitScreenMode: true,
         builder: (BuildContext context, Widget? child) {
           return Container(
-            padding: EdgeInsets.fromLTRB(20.w, 100.h, 20.w, 0.h),
+            padding: EdgeInsets.fromLTRB(20.w,20.h, 20.w, 0.h),
             child:
             SizedBox(
               width:  342.w,
@@ -60,7 +104,7 @@ class _ProfileState extends State<Profile> {
                     ),
                   ),
                   Container(
-                    padding:  EdgeInsets.fromLTRB(16.w, 14.h, 24.w, 11.h),
+                    padding:  EdgeInsets.fromLTRB(16.w, 14.h, 0.w, 11.h),
                     width:  double.infinity,
                     decoration:  BoxDecoration (
                       color:  Colors.white,
@@ -73,17 +117,16 @@ class _ProfileState extends State<Profile> {
                         ),
                       ],
                     ),
-                    child:
-                    Column(
+                    child: Column(
                       crossAxisAlignment:  CrossAxisAlignment.center,
                       children:  [
                         Container(
                           margin:  EdgeInsets.fromLTRB(0.w, 0.h, 0.w, 11.h),
-                          padding:  EdgeInsets.fromLTRB(0.w, 0.h, 117.w, 0.h),
+                          padding:  EdgeInsets.fromLTRB(0.w, 0.h, 0.w, 0.h),
                           width:  double.infinity,
                           child:
                           Text(
-                            'Username',
+                            'Username: $_username',
                             style:  TextStyle (
                               fontSize:  16.sp,
                               fontWeight:  FontWeight.w400,
@@ -109,7 +152,7 @@ class _ProfileState extends State<Profile> {
                            margin:  EdgeInsets.fromLTRB(0.w, 0.h, 161.w, 0.h),
                             child:
                             Text(
-                              'Name',
+                              'Name: $_name',
                               style:  TextStyle (
                                 fontSize:  16.sp,
                                 fontWeight:  FontWeight.w400,
@@ -137,7 +180,7 @@ class _ProfileState extends State<Profile> {
                             margin:  EdgeInsets.fromLTRB(0.w, 0.h, 153.w, 0.h),
                             child:
                             Text(
-                              'Surname',
+                              'Surname: $_surname',
                               style:  TextStyle (
                                 fontSize:  16.sp,
                                 fontWeight:  FontWeight.w400,
@@ -161,18 +204,14 @@ class _ProfileState extends State<Profile> {
                           margin:  EdgeInsets.fromLTRB(0.w, 0.h, 0.w, 13.h),
                           width:  double.infinity,
                           child:
-                          Container(
-                            margin:  EdgeInsets.fromLTRB(0.w, 0.h, 153.w, 0.h),
-                            child:
-                            Text(
-                              'Email',
-                              style:  TextStyle (
-                                fontSize:  16.sp,
-                                fontWeight:  FontWeight.w400,
-                                height:  1.4285714286.h,
-                                letterSpacing:  0.25,
-                                color:  Colors.grey,
-                              ),
+                          Text(
+                            'Email: $_username',
+                            style:  TextStyle (
+                              fontSize:  16.sp,
+                              fontWeight:  FontWeight.w400,
+                              height:  1.4285714286.h,
+                              letterSpacing:  0.25,
+                              color:  Colors.grey,
                             ),
                           ),
                         ),
@@ -189,18 +228,14 @@ class _ProfileState extends State<Profile> {
                           margin:  EdgeInsets.fromLTRB(0.w, 0.h, 0.w, 13.h),
                           width:  double.infinity,
                           child:
-                          Container(
-                            margin:  EdgeInsets.fromLTRB(0.w, 0.h, 153.w, 0.h),
-                            child:
-                            Text(
-                              'Address',
-                              style:  TextStyle (
-                                fontSize:  16.sp,
-                                fontWeight:  FontWeight.w400,
-                                height:  1.4285714286.h,
-                                letterSpacing:  0.25,
-                                color:  Colors.grey,
-                              ),
+                          Text(
+                            'Address: Huế',
+                            style:  TextStyle (
+                              fontSize:  16.sp,
+                              fontWeight:  FontWeight.w400,
+                              height:  1.4285714286.h,
+                              letterSpacing:  0.25,
+                              color:  Colors.grey,
                             ),
                           ),
                         ),
