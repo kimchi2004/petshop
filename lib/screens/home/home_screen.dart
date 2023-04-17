@@ -19,7 +19,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
 
-  bool _isLoading = false;
+  final bool _isLoading = false;
   String _token = '';
 
   @override
@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen>
         return Scaffold(
           body: SingleChildScrollView(
             child: _isLoading
-                ? Center(child: CircularProgressIndicator())
+                ? const Center(child: CircularProgressIndicator())
                 : _token.isNotEmpty
                 ? Center(
               child: Column(
